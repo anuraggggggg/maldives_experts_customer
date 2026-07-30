@@ -1,0 +1,43 @@
+abstract final class AppStrings {
+  static const appName = 'Maldives Experts';
+  static const appTagline = 'Your island escape starts here';
+  static const login = 'Log in';
+  static const email = 'Email';
+  static const emailAddress = 'Email Address';
+  static const emailHint = 'Enter your email address';
+  static const password = 'Password';
+  static const passwordHint = 'Enter your password';
+  static const welcomeBack = 'Welcome back';
+  static const welcomeBackEmphasis = 'Welcome Back!';
+  static const loginSubtitle = 'Login to continue to your account';
+  static const discoverParadise = 'Discover Paradise';
+  static const inMaldives = 'in Maldives';
+  static const heroSubtitle =
+      'Luxury resorts, unforgettable experiences and memories that last a lifetime.';
+  static const rememberMe = 'Remember me';
+  static const forgotPassword = 'Forgot password?';
+  static const or = 'OR';
+  static const loginWith = 'Login with';
+  static const google = 'Google';
+  static const facebook = 'Facebook';
+  static const apple = 'Apple';
+  static const noAccount = "Don't have an account? ";
+  static const signUp = 'Sign up';
+  static const secureBooking = 'Secure Booking';
+  static const bestPrice = 'Best Price Guarantee';
+  static const supportAlways = '24/7 Support';
+  static const featureComingSoon = 'This option will be available soon.';
+  static const home = 'Home';
+  static const search = 'Search';
+  static const wishlist = 'Wishlist';
+  static const bookings = 'Bookings';
+  static const profile = 'Profile';
+  static const exploreMaldives = 'Explore the Maldives';
+  static const comingSoon = 'Curated island experiences are coming soon.';
+  static const requiredField = 'This field is required';
+  static const invalidEmail = 'Enter a valid email address';
+  static const noData = 'Nothing here yet';
+  static const tryAgain = 'Try again';
+  static const genericError = 'Something went wrong. Please try again.';
+  static const noInternet = 'Check your internet connection and try again.';
+}
