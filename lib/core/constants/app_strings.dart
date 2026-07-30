@@ -1,6 +1,11 @@
 abstract final class AppStrings {
   static const appName = 'Maldives Experts';
   static const appTagline = 'Your island escape starts here';
+  static const dreamHoliday = 'Your Dream Holiday';
+  static const ourExpertise = 'Our Expertise';
+  static const splashDescription =
+      'Discover the Maldives like never before.\n'
+      'Luxury stays, unforgettable experiences.';
   static const login = 'Log in';
   static const email = 'Email';
   static const emailAddress = 'Email Address';
