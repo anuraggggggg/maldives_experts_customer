@@ -22,6 +22,23 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> register({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    _setLoading(true);
+    _error = null;
+    try {
+      await Future<void>.delayed(const Duration(milliseconds: 400));
+      _isLoggedIn = true;
+    } catch (_) {
+      _error = 'Registration failed';
+    } finally {
+      _setLoading(false);
+    }
+  }
+
   void logout() {
     _isLoggedIn = false;
     _error = null;

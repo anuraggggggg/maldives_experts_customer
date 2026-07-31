@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maldives_experts_customer/views/language_selection_screen.dart';
+import 'package:maldives_experts_customer/views/onboarding/onboarding_screen.dart';
 
 import '../../providers/auth_provider.dart';
 import '../../views/auth/login_screen.dart';
@@ -21,9 +23,23 @@ class AppRouter {
     refreshListenable: _authProvider,
     redirect: (context, state) {
       final path = state.uri.path;
-      final publicRoute = path == '/splash' || path == '/login';
+
+      // 1. ADDED '/onboarding' HERE TO ALLOW UNAUTHENTICATED ACCESS
+      final publicRoute =
+          path == '/splash' ||
+          path == '/onboarding' ||
+          path == '/language-selection' ||
+          path == '/login';
+
       if (!_authProvider.isLoggedIn && !publicRoute) return '/login';
-      if (_authProvider.isLoggedIn && path == '/login') return '/home';
+
+      // Prevent logged in users from returning to onboarding/language/login
+      if (_authProvider.isLoggedIn &&
+          (path == '/login' ||
+              path == '/language-selection' ||
+              path == '/onboarding')) {
+        return '/home';
+      }
       return null;
     },
     routes: [
@@ -31,6 +47,18 @@ class AppRouter {
         path: '/splash',
         name: RouteNames.splash,
         builder: (_, __) => const SplashScreen(),
+      ),
+      // 2. REGISTERED ONBOARDING ROUTE
+      GoRoute(
+        path: '/onboarding',
+        name: RouteNames
+            .onboarding, // Add 'onboarding' in route_names.dart if used
+        builder: (_, __) => const OnboardingAdScreen(),
+      ),
+      GoRoute(
+        path: '/language-selection',
+        name: RouteNames.languageSelection,
+        builder: (_, __) => const LanguageSelectionScreen(),
       ),
       GoRoute(
         path: '/login',

@@ -12,7 +12,7 @@ abstract final class AppStrings {
   static const emailHint = 'Enter your email address';
   static const password = 'Password';
   static const passwordHint = 'Enter your password';
-  static const welcomeBack = 'Welcome back';
+  static const welcomeBack = 'Welcome back !';
   static const welcomeBackEmphasis = 'Welcome Back!';
   static const loginSubtitle = 'Login to continue to your account';
   static const discoverParadise = 'Discover Paradise';
