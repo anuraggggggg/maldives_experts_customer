@@ -1,6 +1,11 @@
 import 'package:flutter/foundation.dart';
 
+import '../core/constants/app_constants.dart';
+
 class AuthProvider extends ChangeNotifier {
+  static const demoEmail = 'user@gmail.com';
+  static const demoPassword = '123456';
+
   bool _isLoggedIn = false;
   bool _isLoading = false;
   String? _error;
@@ -13,7 +18,13 @@ class AuthProvider extends ChangeNotifier {
     _setLoading(true);
     _error = null;
     try {
-      await Future<void>.delayed(const Duration(milliseconds: 400));
+      await Future<void>.delayed(AppConstants.mockNetworkDelay);
+
+      if (email.toLowerCase() != demoEmail || password != demoPassword) {
+        _error = 'Invalid email or password';
+        return;
+      }
+
       _isLoggedIn = true;
     } catch (_) {
       _error = 'Login failed';
@@ -30,7 +41,7 @@ class AuthProvider extends ChangeNotifier {
     _setLoading(true);
     _error = null;
     try {
-      await Future<void>.delayed(const Duration(milliseconds: 400));
+      await Future<void>.delayed(AppConstants.mockNetworkDelay);
       _isLoggedIn = true;
     } catch (_) {
       _error = 'Registration failed';

@@ -63,6 +63,10 @@ class _SplashScreenState extends State<SplashScreen>
               filterQuality: FilterQuality.high,
             ),
 
+            // Gently lifts the dark background so the blue brand mark remains
+            // visible while the resort image keeps its original detail.
+            const ColoredBox(color: AppColors.backgroundLift),
+
             const _SplashShade(),
 
             SafeArea(
@@ -151,14 +155,13 @@ class _SplashLogo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          'assets/images/maldives5.png',
-          width: 310,
+          AppConstants.blueBrandLogoPath,
+          width: 320,
           fit: BoxFit.contain,
           filterQuality: FilterQuality.high,
+          isAntiAlias: true,
         ),
-
-        const SizedBox(height: 3),
-
+        const SizedBox(height: 4),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
           child: FittedBox(
@@ -258,7 +261,7 @@ class _GoldDivider extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 9),
             child: Image.asset(
-              'assets/images/coconut-tree-gold.png',
+              AppConstants.goldPalmPath,
               width: 25,
               height: 25,
               fit: BoxFit.contain,

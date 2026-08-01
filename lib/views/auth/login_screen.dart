@@ -1,11 +1,15 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../core/constants/app_strings.dart';
 import '../../core/helpers/validators.dart';
 import '../../core/theme/app_colors.dart';
+import '../../core/widgets/app_button.dart';
 import '../../core/widgets/app_snackbar.dart';
+import '../../core/widgets/app_text_field.dart';
 import '../../providers/auth_provider.dart';
 
 /// Pixel-perfect implementation matching target UI.
@@ -19,7 +23,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
-  final _emailOrPhone = TextEditingController();
+  final _emailController = TextEditingController();
+  final _mobileController = TextEditingController();
   final _password = TextEditingController();
   final _confirmPassword = TextEditingController();
 
@@ -30,7 +35,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void dispose() {
     _nameController.dispose();
-    _emailOrPhone.dispose();
+    _emailController.dispose();
+    _mobileController.dispose();
     _password.dispose();
     _confirmPassword.dispose();
     super.dispose();
@@ -43,13 +49,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (_isLoginTab) {
       await auth.login(
-        email: _emailOrPhone.text.trim(),
+        email: _emailController.text.trim(),
         password: _password.text,
       );
+
+      final error = auth.error;
+      if (mounted && error != null) {
+        AppSnackbar.show(context, error);
+      }
     } else {
       await auth.register(
         name: _nameController.text.trim(),
-        email: _emailOrPhone.text.trim(),
+        email: _emailController.text.trim(),
         password: _password.text,
       );
     }
@@ -82,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
           // Full-screen background image
           Positioned.fill(
             child: Image.asset(
-              'assets/images/login_screen_background.png',
+              AppConstants.authBackgroundPath,
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
             ),
@@ -91,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
           // Scrollable layout content
           SafeArea(
             child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Center(
                 child: ConstrainedBox(
@@ -104,9 +116,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       Center(
                         child: SizedBox(
                           width: screenWidth * 0.65,
-                          child: const Image(
-                            image: AssetImage('assets/images/footer_logo.png'),
-                            fit: BoxFit.contain,
+                          child: const Hero(
+                            tag: AppConstants.brandLogoHeroTag,
+                            child: Image(
+                              image: AssetImage(AppConstants.brandLogoPath),
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         ),
                       ),
@@ -128,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         _isLoginTab
                             ? 'Login to continue your journey\nto the Maldives 🌊'
                             : 'Sign up to start planning your dream\ngetaway to the Maldives 🌊',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 15,
                           height: 1.35,
@@ -145,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.06),
+                              color: Colors.black.withValues(alpha: 0.06),
                               blurRadius: 20,
                               offset: const Offset(0, 10),
                             ),
@@ -155,7 +170,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: _LoginFormCard(
                           formKey: _formKey,
                           nameController: _nameController,
-                          emailController: _emailOrPhone,
+                          emailController: _emailController,
+                          mobileController: _mobileController,
                           passwordController: _password,
                           confirmPasswordController: _confirmPassword,
                           obscurePassword: _obscurePassword,
@@ -202,6 +218,7 @@ class _LoginFormCard extends StatelessWidget {
     required this.formKey,
     required this.nameController,
     required this.emailController,
+    required this.mobileController,
     required this.passwordController,
     required this.confirmPasswordController,
     required this.obscurePassword,
@@ -217,6 +234,7 @@ class _LoginFormCard extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController nameController;
   final TextEditingController emailController;
+  final TextEditingController mobileController;
   final TextEditingController passwordController;
   final TextEditingController confirmPasswordController;
   final bool obscurePassword;
@@ -242,33 +260,46 @@ class _LoginFormCard extends StatelessWidget {
 
             // Name Field (Register Mode Only)
             if (!isLoginTab) ...[
-              _LoginField(
+              AppTextField(
                 controller: nameController,
                 label: 'Full Name',
                 hint: 'Enter your full name',
-                icon: Icons.person_outline,
+                prefixIcon: Icons.person_outline,
                 validator: Validators.required,
               ),
               const SizedBox(height: 16),
             ],
 
-            // Email or Mobile Field
-            _LoginField(
+            // Email Field
+            AppTextField(
               controller: emailController,
-              label: 'Email or Mobile Number',
-              hint: 'Enter email or mobile number',
-              icon: Icons.email_outlined,
+              label: 'Email Address',
+              hint: 'Enter your email address',
+              prefixIcon: Icons.email_outlined,
               keyboardType: TextInputType.emailAddress,
-              validator: Validators.required,
+              validator: Validators.email,
             ),
             const SizedBox(height: 16),
 
+            // Mobile Number Field (Register Mode Only)
+            if (!isLoginTab) ...[
+              AppTextField(
+                controller: mobileController,
+                label: 'Mobile Number',
+                hint: 'Enter your mobile number',
+                prefixIcon: Icons.phone_outlined,
+                keyboardType: TextInputType.phone,
+                validator: Validators.required,
+              ),
+              const SizedBox(height: 16),
+            ],
+
             // Password Field
-            _LoginField(
+            AppTextField(
               controller: passwordController,
               label: AppStrings.password,
               hint: isLoginTab ? 'Enter your password' : 'Create a password',
-              icon: Icons.lock_outline,
+              prefixIcon: Icons.lock_outline,
               obscureText: obscurePassword,
               validator: Validators.required,
               suffixIcon: IconButton(
@@ -277,7 +308,7 @@ class _LoginFormCard extends StatelessWidget {
                   obscurePassword
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
-                  color: const Color(0xFF6B7280),
+                  color: AppColors.inputIcon,
                   size: 20,
                 ),
               ),
@@ -286,11 +317,11 @@ class _LoginFormCard extends StatelessWidget {
             // Confirm Password Field (Register Mode Only)
             if (!isLoginTab) ...[
               const SizedBox(height: 16),
-              _LoginField(
+              AppTextField(
                 controller: confirmPasswordController,
                 label: 'Confirm Password',
                 hint: 'Re-enter your password',
-                icon: Icons.lock_outline,
+                prefixIcon: Icons.lock_outline,
                 obscureText: obscureConfirmPassword,
                 validator: (val) {
                   if (val == null || val.isEmpty) {
@@ -307,7 +338,7 @@ class _LoginFormCard extends StatelessWidget {
                     obscureConfirmPassword
                         ? Icons.visibility_outlined
                         : Icons.visibility_off_outlined,
-                    color: const Color(0xFF6B7280),
+                    color: AppColors.inputIcon,
                     size: 20,
                   ),
                 ),
@@ -319,7 +350,11 @@ class _LoginFormCard extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: onSecondaryAction,
+                  onPressed: () {
+                    // Navigates to the Forgot Password screen
+                    context.push('/forgot-password');
+                    // OR if using path: context.push('/forgot-password');
+                  },
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.only(top: 8, bottom: 16),
                     minimumSize: Size.zero,
@@ -328,7 +363,7 @@ class _LoginFormCard extends StatelessWidget {
                   child: const Text(
                     'Forgot Password?',
                     style: TextStyle(
-                      color: Color(0xFF0066CC),
+                      color: AppColors.authBlue,
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                     ),
@@ -339,11 +374,14 @@ class _LoginFormCard extends StatelessWidget {
               const SizedBox(height: 24),
 
             // Submit Gradient Button
-            Consumer<AuthProvider>(
-              builder: (_, auth, __) => _GradientLoginButton(
-                isLoading: auth.isLoading,
+            Selector<AuthProvider, bool>(
+              selector: (_, auth) => auth.isLoading,
+              builder: (_, isLoading, __) => AppButton(
+                isLoading: isLoading,
                 label: isLoginTab ? 'Login' : 'Register',
-                onPressed: auth.isLoading ? null : onSubmit,
+                onPressed: isLoading ? null : onSubmit,
+                gradient: AppColors.authGradient,
+                icon: Icons.arrow_forward,
               ),
             ),
 
@@ -355,7 +393,7 @@ class _LoginFormCard extends StatelessWidget {
               isLoginTab ? 'Login with' : 'Register with',
               textAlign: TextAlign.center,
               style: const TextStyle(
-                color: Color(0xFF0F2540),
+                color: AppColors.authNavy,
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
               ),
@@ -395,16 +433,16 @@ class _AuthTabBar extends StatelessWidget {
                         Icons.person,
                         size: 20,
                         color: isLoginTab
-                            ? const Color(0xFF0F2540)
-                            : const Color(0xFF9CA3AF),
+                            ? AppColors.authNavy
+                            : AppColors.inactive,
                       ),
                       const SizedBox(width: 8),
                       Text(
                         'Login',
                         style: TextStyle(
                           color: isLoginTab
-                              ? const Color(0xFF0F2540)
-                              : const Color(0xFF9CA3AF),
+                              ? AppColors.authNavy
+                              : AppColors.inactive,
                           fontWeight: isLoginTab
                               ? FontWeight.w700
                               : FontWeight.w500,
@@ -428,16 +466,16 @@ class _AuthTabBar extends StatelessWidget {
                         Icons.person_add_alt_1,
                         size: 20,
                         color: !isLoginTab
-                            ? const Color(0xFF0F2540)
-                            : const Color(0xFF9CA3AF),
+                            ? AppColors.authNavy
+                            : AppColors.inactive,
                       ),
                       const SizedBox(width: 8),
                       Text(
                         'Register',
                         style: TextStyle(
                           color: !isLoginTab
-                              ? const Color(0xFF0F2540)
-                              : const Color(0xFF9CA3AF),
+                              ? AppColors.authNavy
+                              : AppColors.inactive,
                           fontWeight: !isLoginTab
                               ? FontWeight.w700
                               : FontWeight.w500,
@@ -455,15 +493,15 @@ class _AuthTabBar extends StatelessWidget {
         // Bottom Tab Border Lines
         Stack(
           children: [
-            Container(height: 1, color: const Color(0xFFE5E7EB)),
+            Container(height: 1, color: AppColors.divider),
             AnimatedAlign(
-              duration: const Duration(milliseconds: 200),
+              duration: AppConstants.shortAnimationDuration,
               alignment: isLoginTab
                   ? Alignment.centerLeft
                   : Alignment.centerRight,
               child: FractionallySizedBox(
                 widthFactor: 0.5,
-                child: Container(height: 2, color: const Color(0xFF0066CC)),
+                child: Container(height: 2, color: AppColors.authBlue),
               ),
             ),
           ],
@@ -473,137 +511,13 @@ class _AuthTabBar extends StatelessWidget {
   }
 }
 
-class _LoginField extends StatelessWidget {
-  const _LoginField({
-    required this.controller,
-    required this.label,
-    required this.hint,
-    required this.icon,
-    this.keyboardType,
-    this.obscureText = false,
-    this.validator,
-    this.suffixIcon,
-  });
-
-  final TextEditingController controller;
-  final String label;
-  final String hint;
-  final IconData icon;
-  final TextInputType? keyboardType;
-  final bool obscureText;
-  final FormFieldValidator<String>? validator;
-  final Widget? suffixIcon;
-
-  @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        label,
-        style: const TextStyle(
-          color: Color(0xFF0F2540),
-          fontWeight: FontWeight.w700,
-          fontSize: 13,
-        ),
-      ),
-      const SizedBox(height: 8),
-      TextFormField(
-        controller: controller,
-        keyboardType: keyboardType,
-        obscureText: obscureText,
-        validator: validator,
-        style: const TextStyle(fontSize: 14, color: Color(0xFF1F2937)),
-        decoration: InputDecoration(
-          hintText: hint,
-          hintStyle: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
-          prefixIcon: Icon(icon, color: const Color(0xFF9CA3AF), size: 20),
-          suffixIcon: suffixIcon,
-          filled: true,
-          fillColor: const Color(0xFFF9FAFB),
-          contentPadding: const EdgeInsets.symmetric(vertical: 14),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Color(0xFFE5E7EB)),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(color: Color(0xFF0066CC), width: 1.5),
-          ),
-        ),
-      ),
-    ],
-  );
-}
-
-class _GradientLoginButton extends StatelessWidget {
-  const _GradientLoginButton({
-    required this.isLoading,
-    required this.label,
-    required this.onPressed,
-  });
-
-  final bool isLoading;
-  final String label;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) => Container(
-    height: 48,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
-      gradient: const LinearGradient(
-        colors: [Color(0xFF0F2540), Color(0xFF0066CC)],
-        begin: Alignment.centerLeft,
-        end: Alignment.centerRight,
-      ),
-    ),
-    child: Material(
-      color: Colors.transparent,
-      child: InkWell(
-        borderRadius: BorderRadius.circular(10),
-        onTap: onPressed,
-        child: Center(
-          child: isLoading
-              ? const SizedBox(
-                  width: 22,
-                  height: 22,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    valueColor: AlwaysStoppedAnimation(Colors.white),
-                  ),
-                )
-              : Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      label,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 15,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    const Icon(
-                      Icons.arrow_forward,
-                      color: Colors.white,
-                      size: 18,
-                    ),
-                  ],
-                ),
-        ),
-      ),
-    ),
-  );
-}
-
 class _OrDivider extends StatelessWidget {
   const _OrDivider();
 
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      const Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+      const Expanded(child: Divider(color: AppColors.divider)),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Text(
@@ -615,7 +529,7 @@ class _OrDivider extends StatelessWidget {
           ),
         ),
       ),
-      const Expanded(child: Divider(color: Color(0xFFE5E7EB))),
+      const Expanded(child: Divider(color: AppColors.divider)),
     ],
   );
 }
@@ -634,7 +548,7 @@ class _SocialLoginRow extends StatelessWidget {
           iconWidget: const Text(
             'G',
             style: TextStyle(
-              color: Color(0xFFEA4335),
+              color: AppColors.googleRed,
               fontWeight: FontWeight.w900,
               fontSize: 18,
             ),
@@ -648,7 +562,7 @@ class _SocialLoginRow extends StatelessWidget {
           label: 'Facebook',
           iconWidget: const Icon(
             Icons.facebook,
-            color: Color(0xFF1877F2),
+            color: AppColors.facebookBlue,
             size: 20,
           ),
           onPressed: onPressed,
@@ -674,7 +588,7 @@ class _SocialButton extends StatelessWidget {
     onPressed: onPressed,
     style: OutlinedButton.styleFrom(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      side: const BorderSide(color: Color(0xFFE5E7EB)),
+      side: const BorderSide(color: AppColors.divider),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       backgroundColor: Colors.white,
     ),
@@ -687,7 +601,7 @@ class _SocialButton extends StatelessWidget {
           label,
           style: const TextStyle(
             fontSize: 12,
-            color: Color(0xFF1F2937),
+            color: AppColors.inputText,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -751,13 +665,13 @@ class _TrustBadge extends StatelessWidget {
     padding: const EdgeInsets.symmetric(horizontal: 2),
     child: Column(
       children: [
-        Icon(icon, color: const Color(0xFF0F2540), size: 24),
+        Icon(icon, color: AppColors.authNavy, size: 24),
         const SizedBox(height: 8),
         Text(
           title,
           textAlign: TextAlign.center,
           style: const TextStyle(
-            color: Color(0xFF0F2540),
+            color: AppColors.authNavy,
             fontSize: 11,
             fontWeight: FontWeight.w700,
           ),
@@ -767,7 +681,7 @@ class _TrustBadge extends StatelessWidget {
           subtitle,
           textAlign: TextAlign.center,
           style: const TextStyle(
-            color: Color(0xFF6B7280),
+            color: AppColors.inputIcon,
             fontSize: 9,
             height: 1.2,
           ),
@@ -786,13 +700,13 @@ class _TermsFooter extends StatelessWidget {
   Widget build(BuildContext context) => RichText(
     textAlign: TextAlign.center,
     text: TextSpan(
-      style: const TextStyle(color: Color(0xFF6B7280), fontSize: 11),
+      style: const TextStyle(color: AppColors.inputIcon, fontSize: 11),
       children: [
         const TextSpan(text: 'By continuing, you agree to our '),
         TextSpan(
           text: 'Terms & Conditions',
           style: const TextStyle(
-            color: Color(0xFF0066CC),
+            color: AppColors.authBlue,
             fontWeight: FontWeight.w600,
           ),
           recognizer: TapGestureRecognizer()..onTap = onTap,
@@ -801,7 +715,7 @@ class _TermsFooter extends StatelessWidget {
         TextSpan(
           text: 'Privacy Policy',
           style: const TextStyle(
-            color: Color(0xFF0066CC),
+            color: AppColors.authBlue,
             fontWeight: FontWeight.w600,
           ),
           recognizer: TapGestureRecognizer()..onTap = onTap,

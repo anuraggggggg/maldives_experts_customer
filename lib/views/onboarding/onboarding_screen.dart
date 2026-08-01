@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/constants/app_constants.dart';
 import '../../core/routes/route_names.dart';
+import '../../core/theme/app_colors.dart';
 
 class OnboardingAdScreen extends StatelessWidget {
   const OnboardingAdScreen({super.key});
@@ -17,7 +19,7 @@ class OnboardingAdScreen extends StatelessWidget {
           // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/images/add_screen_bg.png',
+              AppConstants.authHeaderBackgroundPath,
               fit: BoxFit.cover,
             ),
           ),
@@ -59,40 +61,41 @@ class OnboardingAdScreen extends StatelessWidget {
                   SizedBox(
                     width: screenWidth * 0.70,
                     child: Image.asset(
-                      'assets/images/footer_logo.png',
+                      AppConstants.brandLogoPath,
                       fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) => Column(
-                        children: const [
-                          Text(
-                            'Maldives',
-                            style: TextStyle(
-                              fontSize: 34,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF0F2540),
-                              letterSpacing: 1.2,
-                            ),
+                      errorBuilder: (context, error, stackTrace) =>
+                          const Column(
+                            children: [
+                              Text(
+                                'Maldives',
+                                style: TextStyle(
+                                  fontSize: 34,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.authNavy,
+                                  letterSpacing: 1.2,
+                                ),
+                              ),
+                              Text(
+                                'EXPERTS',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppColors.orange,
+                                  letterSpacing: 4.0,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'EXPERTISE • EXPERIENCE • EXCELLENCE',
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.authNavy,
+                                  letterSpacing: 1.5,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            'EXPERTS',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFFFF9900),
-                              letterSpacing: 4.0,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            'EXPERTISE • EXPERIENCE • EXCELLENCE',
-                            style: TextStyle(
-                              fontSize: 9,
-                              fontWeight: FontWeight.w600,
-                              color: Color(0xFF0F2540),
-                              letterSpacing: 1.5,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
 
@@ -105,7 +108,7 @@ class OnboardingAdScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 26,
                       fontWeight: FontWeight.w900,
-                      color: Color(0xFF0F2540),
+                      color: AppColors.authNavy,
                       letterSpacing: 0.2,
                     ),
                   ),
@@ -117,8 +120,9 @@ class OnboardingAdScreen extends StatelessWidget {
                       fontSize: 24,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.italic,
-                      color: Color(0xFF0088FF),
-                      fontFamily: 'Cursive', // Falls back to default serif/italic if custom font isn't loaded
+                      color: AppColors.brightBlue,
+                      fontFamily:
+                          'Cursive', // Falls back to default serif/italic if custom font isn't loaded
                     ),
                   ),
 
@@ -129,7 +133,7 @@ class OnboardingAdScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Divider(
-                          color: Color(0xFFFFB800),
+                          color: AppColors.yellow,
                           thickness: 1,
                           indent: 60,
                           endIndent: 10,
@@ -138,11 +142,11 @@ class OnboardingAdScreen extends StatelessWidget {
                       Icon(
                         Icons.star_rounded,
                         size: 16,
-                        color: Color(0xFFFFB800),
+                        color: AppColors.yellow,
                       ),
                       Expanded(
                         child: Divider(
-                          color: Color(0xFFFFB800),
+                          color: AppColors.yellow,
                           thickness: 1,
                           indent: 10,
                           endIndent: 60,
@@ -159,7 +163,7 @@ class OnboardingAdScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 13,
-                      color: Color(0xFF334155),
+                      color: AppColors.slateDark,
                       height: 1.35,
                     ),
                   ),
@@ -170,17 +174,17 @@ class OnboardingAdScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w800,
-                      color: Color(0xFF0F2540),
+                      color: AppColors.authNavy,
                     ),
                   ),
 
                   const SizedBox(height: 20),
 
                   // 3 Feature Highlights Row
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Expanded(
                         child: _FeatureItem(
                           icon: Icons.beach_access,
@@ -214,13 +218,13 @@ class OnboardingAdScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(26),
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF0044B3), Color(0xFF0099FF)],
+                        colors: [AppColors.deepBlue, AppColors.vividBlue],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF0066CC).withOpacity(0.35),
+                          color: AppColors.authBlue.withValues(alpha: 0.35),
                           blurRadius: 12,
                           offset: const Offset(0, 4),
                         ),
@@ -267,7 +271,7 @@ class OnboardingAdScreen extends StatelessWidget {
                         width: 8,
                         height: 8,
                         decoration: const BoxDecoration(
-                          color: Color(0xFF0088FF),
+                          color: AppColors.brightBlue,
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -276,7 +280,7 @@ class OnboardingAdScreen extends StatelessWidget {
                         width: 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.12),
+                          color: Colors.black.withValues(alpha: 0.12),
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -285,7 +289,7 @@ class OnboardingAdScreen extends StatelessWidget {
                         width: 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.12),
+                          color: Colors.black.withValues(alpha: 0.12),
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -294,7 +298,7 @@ class OnboardingAdScreen extends StatelessWidget {
                         width: 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.12),
+                          color: Colors.black.withValues(alpha: 0.12),
                           shape: BoxShape.circle,
                         ),
                       ),
@@ -332,14 +336,10 @@ class _FeatureItem extends StatelessWidget {
           width: 54,
           height: 54,
           decoration: const BoxDecoration(
-            color: Color(0xFFE2F1FF),
+            color: AppColors.softBlue,
             shape: BoxShape.circle,
           ),
-          child: Icon(
-            icon,
-            color: const Color(0xFF0066CC),
-            size: 26,
-          ),
+          child: Icon(icon, color: AppColors.authBlue, size: 26),
         ),
         const SizedBox(height: 8),
         Text(
@@ -348,7 +348,7 @@ class _FeatureItem extends StatelessWidget {
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w800,
-            color: Color(0xFF0F2540),
+            color: AppColors.authNavy,
           ),
         ),
         const SizedBox(height: 2),
@@ -357,7 +357,7 @@ class _FeatureItem extends StatelessWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 10,
-            color: Color(0xFF64748B),
+            color: AppColors.slate,
             height: 1.2,
           ),
         ),

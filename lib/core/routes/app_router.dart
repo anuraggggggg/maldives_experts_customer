@@ -1,15 +1,22 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maldives_experts_customer/views/auth/forgot_pass.dart';
+import 'package:maldives_experts_customer/views/auth/reset_password.dart';
 import 'package:maldives_experts_customer/views/language_selection_screen.dart';
 import 'package:maldives_experts_customer/views/onboarding/onboarding_screen.dart';
 
 import '../../providers/auth_provider.dart';
 import '../../views/auth/login_screen.dart';
 import '../../views/home/home_screen.dart';
+import '../../views/home/offers_screen.dart';
+import '../../views/home/resorts_screen.dart';
+import '../../views/home/activities_screen.dart';
 import '../../views/splash/splash_screen.dart';
 import '../../views/static/placeholder_screen.dart';
 import '../constants/app_strings.dart';
 import '../services/navigation_service.dart';
+import '../widgets/app_bottom_navigation.dart';
 import 'route_names.dart';
 
 class AppRouter {
@@ -22,48 +29,64 @@ class AppRouter {
     initialLocation: '/splash',
     refreshListenable: _authProvider,
     redirect: (context, state) {
-      final path = state.uri.path;
+      // Using matchedLocation prevents path query string mismatches
+      final path = state.matchedLocation;
 
-      // 1. ADDED '/onboarding' HERE TO ALLOW UNAUTHENTICATED ACCESS
-      final publicRoute =
+      // List of routes accessible when unauthenticated
+      final isPublicRoute =
           path == '/splash' ||
           path == '/onboarding' ||
           path == '/language-selection' ||
-          path == '/login';
+          path == '/login' ||
+          path == '/forgot-password' ||
+          path == '/reset-password';
 
-      if (!_authProvider.isLoggedIn && !publicRoute) return '/login';
+      // 1. Unauthenticated users trying to access protected screens -> redirect to login
+      if (!_authProvider.isLoggedIn && !isPublicRoute) {
+        return '/login';
+      }
 
-      // Prevent logged in users from returning to onboarding/language/login
-      if (_authProvider.isLoggedIn &&
-          (path == '/login' ||
-              path == '/language-selection' ||
-              path == '/onboarding')) {
+      // 2. Authenticated users trying to access auth/public screens -> redirect to home
+      if (_authProvider.isLoggedIn && isPublicRoute && path != '/splash') {
         return '/home';
       }
+
       return null;
     },
     routes: [
       GoRoute(
         path: '/splash',
         name: RouteNames.splash,
-        builder: (_, __) => const SplashScreen(),
+        pageBuilder: (_, state) => _cupertinoPage(state, const SplashScreen()),
       ),
-      // 2. REGISTERED ONBOARDING ROUTE
       GoRoute(
         path: '/onboarding',
-        name: RouteNames
-            .onboarding, // Add 'onboarding' in route_names.dart if used
-        builder: (_, __) => const OnboardingAdScreen(),
+        name: RouteNames.onboarding,
+        pageBuilder: (_, state) =>
+            _cupertinoPage(state, const OnboardingAdScreen()),
       ),
       GoRoute(
         path: '/language-selection',
         name: RouteNames.languageSelection,
-        builder: (_, __) => const LanguageSelectionScreen(),
+        pageBuilder: (_, state) =>
+            _cupertinoPage(state, const LanguageSelectionScreen()),
       ),
       GoRoute(
         path: '/login',
         name: RouteNames.login,
-        builder: (_, __) => const LoginScreen(),
+        pageBuilder: (_, state) => _cupertinoPage(state, const LoginScreen()),
+      ),
+      GoRoute(
+        path: '/forgot-password',
+        name: RouteNames.forgotPassword,
+        pageBuilder: (_, state) =>
+            _cupertinoPage(state, const ForgotPasswordScreen()),
+      ),
+      GoRoute(
+        path: '/reset-password',
+        name: RouteNames.resetPassword,
+        pageBuilder: (_, state) =>
+            _cupertinoPage(state, const ResetPasswordScreen()),
       ),
       StatefulShellRoute.indexedStack(
         builder: (_, __, navigationShell) =>
@@ -74,25 +97,50 @@ class AppRouter {
               GoRoute(
                 path: '/home',
                 name: RouteNames.home,
-                builder: (_, __) => const HomeScreen(),
+                pageBuilder: (_, state) =>
+                    _cupertinoPage(state, const HomeScreen()),
+                routes: [
+                  GoRoute(
+                    path: 'resorts',
+                    name: RouteNames.resorts,
+                    pageBuilder: (_, state) =>
+                        _cupertinoPage(state, const ResortsScreen()),
+                  ),
+                  GoRoute(
+                    path: 'offers',
+                    name: RouteNames.offers,
+                    pageBuilder: (_, state) =>
+                        _cupertinoPage(state, const OffersScreen()),
+                  ),
+                  GoRoute(
+                    path: 'activities',
+                    name: RouteNames.activities,
+                    pageBuilder: (_, state) =>
+                        _cupertinoPage(state, const ActivitiesScreen()),
+                  ),
+                ],
               ),
             ],
           ),
-          _placeholderBranch('/search', RouteNames.search, AppStrings.search),
+          _placeholderBranch(
+            '/my-trips',
+            RouteNames.myTrips,
+            '${AppStrings.myTrips} Page',
+          ),
           _placeholderBranch(
             '/wishlist',
             RouteNames.wishlist,
-            AppStrings.wishlist,
+            '${AppStrings.wishlist} Page',
           ),
           _placeholderBranch(
-            '/bookings',
-            RouteNames.bookings,
-            AppStrings.bookings,
+            '/enquiries',
+            RouteNames.enquiries,
+            '${AppStrings.enquiries} Page',
           ),
           _placeholderBranch(
             '/profile',
             RouteNames.profile,
-            AppStrings.profile,
+            '${AppStrings.profile} Page',
           ),
         ],
       ),
@@ -108,10 +156,14 @@ class AppRouter {
       GoRoute(
         path: path,
         name: name,
-        builder: (_, __) => PlaceholderScreen(title: title),
+        pageBuilder: (_, state) =>
+            _cupertinoPage(state, PlaceholderScreen(title: title)),
       ),
     ],
   );
+
+  static Page<void> _cupertinoPage(GoRouterState state, Widget child) =>
+      CupertinoPage<void>(key: state.pageKey, child: child);
 }
 
 class AppNavigationShell extends StatelessWidget {
@@ -121,35 +173,14 @@ class AppNavigationShell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+    extendBody: true,
     body: navigationShell,
-    bottomNavigationBar: NavigationBar(
-      selectedIndex: navigationShell.currentIndex,
-      onDestinationSelected: (index) => navigationShell.goBranch(
+    bottomNavigationBar: AppBottomNavigation(
+      currentIndex: navigationShell.currentIndex,
+      onSelected: (index) => navigationShell.goBranch(
         index,
         initialLocation: index == navigationShell.currentIndex,
       ),
-      destinations: const [
-        NavigationDestination(
-          icon: Icon(Icons.home_outlined),
-          label: AppStrings.home,
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.search),
-          label: AppStrings.search,
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.favorite_outline),
-          label: AppStrings.wishlist,
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.luggage_outlined),
-          label: AppStrings.bookings,
-        ),
-        NavigationDestination(
-          icon: Icon(Icons.person_outline),
-          label: AppStrings.profile,
-        ),
-      ],
     ),
   );
 }

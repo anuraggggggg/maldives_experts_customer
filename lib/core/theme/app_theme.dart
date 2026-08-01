@@ -36,6 +36,13 @@ abstract final class AppTheme {
           borderSide: BorderSide.none,
         ),
       ),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
+          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+        },
+      ),
     );
   }
 }

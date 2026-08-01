@@ -5,8 +5,27 @@ abstract final class AppDialog {
     BuildContext context, {
     required String title,
     required String message,
-  }) => showDialog<void>(
+    String? actionLabel,
+    VoidCallback? onAction,
+  }) => showAdaptiveDialog<void>(
     context: context,
-    builder: (_) => AlertDialog(title: Text(title), content: Text(message)),
+    builder: (dialogContext) => AlertDialog(
+      title: Text(title),
+      content: Text(message),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(dialogContext).pop(),
+          child: const Text('OK'),
+        ),
+        if (actionLabel != null)
+          TextButton(
+            onPressed: () {
+              Navigator.of(dialogContext).pop();
+              onAction?.call();
+            },
+            child: Text(actionLabel),
+          ),
+      ],
+    ),
   );
 }

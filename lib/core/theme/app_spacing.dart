@@ -1,8 +1,22 @@
 abstract final class AppSpacing {
+  static const xxs = 2.0;
   static const xs = 4.0;
+  static const smPlus = 10.0;
+  static const compact = 12.0;
+  static const regular = 14.0;
   static const sm = 8.0;
   static const md = 16.0;
+  static const mdPlus = 18.0;
+  static const content = 20.0;
   static const lg = 24.0;
+  static const lgPlus = 28.0;
   static const xl = 32.0;
+  static const xxl = 40.0;
+  static const controlHeight = 48.0;
+  static const bottomNavClearance = 104.0;
   static const radius = 14.0;
+  static const radiusSm = 10.0;
+  static const radiusMd = 16.0;
+  static const radiusLg = 20.0;
+  static const radiusPill = 24.0;
 }

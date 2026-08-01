@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../core/routes/route_names.dart';
+import '../core/constants/app_constants.dart';
+import '../core/routes/route_names.dart';
+import '../core/theme/app_colors.dart';
 
 class LanguageModel {
   final String code;
@@ -78,7 +80,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
           // Fixed Background Image across full screen
           Positioned.fill(
             child: Image.asset(
-              'assets/images/bb_image2.png',
+              AppConstants.languageBackgroundPath,
               fit: BoxFit.cover,
             ),
           ),
@@ -96,30 +98,31 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       child: SizedBox(
                         width: screenWidth * 0.65,
                         child: Image.asset(
-                          'assets/images/footer_logo.png',
+                          AppConstants.brandLogoPath,
                           fit: BoxFit.contain,
-                          errorBuilder: (context, error, stackTrace) => Column(
-                            children: const [
-                              Text(
-                                'Maldives',
-                                style: TextStyle(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFF0F2540),
-                                  letterSpacing: 1.2,
-                                ),
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Column(
+                                children: [
+                                  Text(
+                                    'Maldives',
+                                    style: TextStyle(
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.authNavy,
+                                      letterSpacing: 1.2,
+                                    ),
+                                  ),
+                                  Text(
+                                    'EXPERTS',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.orange,
+                                      letterSpacing: 4.0,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                'EXPERTS',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFFFF9900),
-                                  letterSpacing: 4.0,
-                                ),
-                              ),
-                            ],
-                          ),
                         ),
                       ),
                     ),
@@ -130,12 +133,12 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     width: 42,
                     height: 42,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFE6F2FF),
+                      color: AppColors.blueTint,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
                       Icons.language,
-                      color: Color(0xFF0066CC),
+                      color: AppColors.authBlue,
                       size: 22,
                     ),
                   ),
@@ -149,7 +152,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w800,
-                      color: Color(0xFF0F2540),
+                      color: AppColors.authNavy,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -158,7 +161,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 13,
-                      color: Color(0xFF6B7280),
+                      color: AppColors.inputIcon,
                       height: 1.2,
                     ),
                   ),
@@ -168,6 +171,8 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                   // 2. SCROLLABLE MIDDLE SECTION (Only language tiles scroll)
                   Expanded(
                     child: ListView.separated(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
                       physics: const BouncingScrollPhysics(),
                       padding: const EdgeInsets.only(bottom: 12),
                       itemCount: _languages.length,
@@ -199,13 +204,13 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       gradient: const LinearGradient(
-                        colors: [Color(0xFF0052CC), Color(0xFF0088FF)],
+                        colors: [AppColors.royalBlue, AppColors.brightBlue],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF0066CC).withOpacity(0.3),
+                          color: AppColors.authBlue.withValues(alpha: 0.3),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -251,14 +256,14 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                       Icon(
                         Icons.verified_user_outlined,
                         size: 14,
-                        color: Color(0xFF0088FF),
+                        color: AppColors.brightBlue,
                       ),
                       SizedBox(width: 6),
                       Text(
                         'You can change the language anytime from settings',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Color(0xFF6B7280),
+                          color: AppColors.inputIcon,
                           fontSize: 11,
                         ),
                       ),
@@ -290,17 +295,17 @@ class _LanguageTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 180),
+      duration: AppConstants.shortAnimationDuration,
       decoration: BoxDecoration(
-        color: isSelected ? const Color(0xFFF0F7FF) : Colors.white,
+        color: isSelected ? AppColors.blueSurface : Colors.white,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isSelected ? const Color(0xFF0066CC) : Colors.transparent,
+          color: isSelected ? AppColors.authBlue : Colors.transparent,
           width: isSelected ? 1.5 : 0,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.03),
+            color: Colors.black.withValues(alpha: 0.03),
             blurRadius: 6,
             offset: const Offset(0, 2),
           ),
@@ -321,7 +326,7 @@ class _LanguageTile extends StatelessWidget {
                   height: 34,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Color(0xFFF3F4F6),
+                    color: AppColors.lightGrey,
                   ),
                   alignment: Alignment.center,
                   child: Text(
@@ -341,7 +346,7 @@ class _LanguageTile extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFF0F2540),
+                          color: AppColors.authNavy,
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -349,7 +354,7 @@ class _LanguageTile extends StatelessWidget {
                         language.englishName,
                         style: const TextStyle(
                           fontSize: 11,
-                          color: Color(0xFF9CA3AF),
+                          color: AppColors.inactive,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -363,15 +368,10 @@ class _LanguageTile extends StatelessWidget {
                   height: 20,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: isSelected
-                        ? const Color(0xFF0066CC)
-                        : Colors.transparent,
+                    color: isSelected ? AppColors.authBlue : Colors.transparent,
                     border: isSelected
                         ? null
-                        : Border.all(
-                            color: const Color(0xFFD1D5DB),
-                            width: 1.5,
-                          ),
+                        : Border.all(color: AppColors.mediumGrey, width: 1.5),
                   ),
                   child: isSelected
                       ? const Icon(Icons.check, color: Colors.white, size: 12)
