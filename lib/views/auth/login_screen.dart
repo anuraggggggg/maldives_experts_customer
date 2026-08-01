@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/constants/app_constants.dart';
@@ -131,11 +132,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       // Welcome / Get Started Text
                       Text(
                         _isLoginTab ? 'Welcome Back!' : 'Create Account',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 26,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: -0.5,
+                        style: GoogleFonts.playfairDisplay(
+                          color: AppColors.white,
+                          fontSize: 29,
+                          height: 1.1,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.2,
+                          shadows: const [
+                            Shadow(
+                              color: AppColors.authNavy,
+                              blurRadius: 5,
+                              offset: Offset(0, 1),
+                            ),
+                          ],
                         ),
                       ),
                       const SizedBox(height: 6),
