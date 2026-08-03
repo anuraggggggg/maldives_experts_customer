@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../core/constants/app_assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../core/widgets/app_drawer.dart';
+import '../../core/widgets/network_image_widget.dart';
 import 'widgets/booking_benefits.dart';
 import 'widgets/dashboard_category_tabs.dart';
 import 'widgets/dashboard_inner_header.dart';
@@ -14,43 +15,52 @@ class ActivitiesScreen extends StatelessWidget {
   const ActivitiesScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => AnnotatedRegion<SystemUiOverlayStyle>(
-    value: SystemUiOverlayStyle.light,
-    child: Scaffold(
-      backgroundColor: AppColors.white,
-      body: DashboardSwipeNavigator(
-        currentPage: DashboardPage.activities,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              const DashboardInnerHeader(
-                title: 'Activities',
-                subtitle: 'Discover unforgettable experiences\nin the Maldives',
-              ),
-              Transform.translate(
-                offset: const Offset(0, -16),
-                child: const _ActivitySearchPanel(),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppSpacing.content),
-                child: BookingBenefits(),
-              ),
-              const SizedBox(height: AppSpacing.md),
-              const _ActivityCategories(),
-              const SizedBox(height: AppSpacing.md),
-              const _PopularActivities(),
-              const SizedBox(height: AppSpacing.mdPlus),
-              const _ActivityOfferBanner(),
-              const SizedBox(height: AppSpacing.mdPlus),
-              const _ActivityReasons(),
-              const SizedBox(height: AppSpacing.bottomNavClearance),
-            ],
+  Widget build(BuildContext context) {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        key: scaffoldKey,
+        drawer: const AppDrawer(),
+        backgroundColor: AppColors.white,
+        body: DashboardSwipeNavigator(
+          currentPage: DashboardPage.activities,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                DashboardInnerHeader(
+                  title: 'Activities',
+                  subtitle:
+                      'Discover unforgettable experiences\nin the Maldives',
+                  backgroundImageUrl:
+                      'https://images.unsplash.com/photo-1540202404-a2f29016b523?auto=format&fit=crop&w=1800&q=90',
+                  onMenuPressed: () => scaffoldKey.currentState?.openDrawer(),
+                ),
+                Transform.translate(
+                  offset: const Offset(0, -16),
+                  child: const _ActivitySearchPanel(),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.content),
+                  child: BookingBenefits(),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                const _ActivityCategories(),
+                const SizedBox(height: AppSpacing.md),
+                const _PopularActivities(),
+                const SizedBox(height: AppSpacing.mdPlus),
+                const _ActivityOfferBanner(),
+                const SizedBox(height: AppSpacing.mdPlus),
+                const _ActivityReasons(),
+                const SizedBox(height: AppSpacing.bottomNavClearance),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class _ActivitySearchPanel extends StatelessWidget {
@@ -231,22 +241,50 @@ class _ActivityCategories extends StatelessWidget {
   const _ActivityCategories();
 
   static const categories = [
-    ('Water Sports', Icons.surfing_rounded, AppAssets.destinationRaa),
-    ('Snorkeling', Icons.scuba_diving_rounded, AppAssets.destinationBaa),
-    ('Scuba Diving', Icons.water_rounded, AppAssets.dashboardHero),
-    ('Island Hopping', Icons.travel_explore_rounded, AppAssets.destinationMale),
-    ('Fishing', Icons.phishing_rounded, AppAssets.offerBanner),
-    ('Sunset Cruises', Icons.sailing_rounded, AppAssets.destinationRaa),
-    ('Spas', Icons.spa_outlined, AppAssets.destinationBaa),
+    (
+      'Water Sports',
+      Icons.surfing_rounded,
+      'https://images.unsplash.com/photo-1560275619-4662e36fa65c?auto=format&fit=crop&w=500&q=85',
+    ),
+    (
+      'Snorkeling',
+      Icons.scuba_diving_rounded,
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=500&q=85',
+    ),
+    (
+      'Scuba Diving',
+      Icons.water_rounded,
+      'https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=500&q=85',
+    ),
+    (
+      'Island Hopping',
+      Icons.travel_explore_rounded,
+      'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=500&q=85',
+    ),
+    (
+      'Fishing',
+      Icons.phishing_rounded,
+      'https://images.unsplash.com/photo-1544550285-f813152fb2fd?auto=format&fit=crop&w=500&q=85',
+    ),
+    (
+      'Sunset Cruises',
+      Icons.sailing_rounded,
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=500&q=85',
+    ),
+    (
+      'Spas',
+      Icons.spa_outlined,
+      'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=500&q=85',
+    ),
     (
       'Spa & Wellness',
       Icons.self_improvement_rounded,
-      AppAssets.destinationBaa,
+      'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=500&q=85',
     ),
     (
       'Cultural Experiences',
       Icons.celebration_rounded,
-      AppAssets.destinationMale,
+      'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=500&q=85',
     ),
   ];
 
@@ -259,7 +297,7 @@ class _ActivityCategories extends StatelessWidget {
       ),
       const SizedBox(height: AppSpacing.sm),
       SizedBox(
-        height: 100,
+        height: 132,
         child: ListView.separated(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.regular),
           scrollDirection: Axis.horizontal,
@@ -267,7 +305,7 @@ class _ActivityCategories extends StatelessWidget {
           itemCount: categories.length,
           separatorBuilder: (_, __) => const SizedBox(width: AppSpacing.sm),
           itemBuilder: (_, index) => SizedBox(
-            width: 70,
+            width: 98,
             child: Column(
               children: [
                 ClipRRect(
@@ -275,29 +313,24 @@ class _ActivityCategories extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      Image.asset(
-                        categories[index].$3,
-                        width: 68,
-                        height: 65,
-                        fit: BoxFit.cover,
-                      ),
-                      Icon(
-                        categories[index].$2,
-                        color: AppColors.white,
-                        size: 25,
+                      SizedBox(
+                        width: 96,
+                        height: 88,
+                        child: NetworkImageWidget(url: categories[index].$3),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 7),
                 Text(
                   categories[index].$1,
                   maxLines: 2,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: AppColors.authNavy,
-                    fontSize: 8.5,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 11.5,
+                    height: 1.15,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ],
@@ -320,7 +353,7 @@ class _PopularActivities extends StatelessWidget {
       89,
       '4.8',
       'Best Seller',
-      AppAssets.destinationRaa,
+      'https://images.unsplash.com/photo-1560275619-4662e36fa65c?auto=format&fit=crop&w=900&q=85',
     ),
     _ActivityData(
       'Snorkeling Trip',
@@ -329,7 +362,7 @@ class _PopularActivities extends StatelessWidget {
       49,
       '4.7',
       'Most Popular',
-      AppAssets.destinationBaa,
+      'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=85',
     ),
     _ActivityData(
       'Scuba Diving Experience',
@@ -338,7 +371,7 @@ class _PopularActivities extends StatelessWidget {
       129,
       '4.9',
       'Top Rated',
-      AppAssets.dashboardHero,
+      'https://images.unsplash.com/photo-1530053969600-caed2596d242?auto=format&fit=crop&w=900&q=85',
     ),
     _ActivityData(
       'Island Hopping Tour',
@@ -347,7 +380,7 @@ class _PopularActivities extends StatelessWidget {
       79,
       '4.6',
       'Great Value',
-      AppAssets.destinationMale,
+      'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=900&q=85',
     ),
     _ActivityData(
       'Sunset Cruise',
@@ -356,7 +389,7 @@ class _PopularActivities extends StatelessWidget {
       59,
       '4.7',
       'Sunset Special',
-      AppAssets.destinationRaa,
+      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85',
     ),
     _ActivityData(
       'Parasailing Adventure',
@@ -365,7 +398,7 @@ class _PopularActivities extends StatelessWidget {
       75,
       '4.5',
       'Thrilling',
-      AppAssets.destinationBaa,
+      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=900&q=85',
     ),
     _ActivityData(
       'Big Game Fishing',
@@ -374,7 +407,7 @@ class _PopularActivities extends StatelessWidget {
       109,
       '4.8',
       'Deep Sea',
-      AppAssets.offerBanner,
+      'https://images.unsplash.com/photo-1544550285-f813152fb2fd?auto=format&fit=crop&w=900&q=85',
     ),
     _ActivityData(
       'Spa & Wellness',
@@ -383,7 +416,7 @@ class _PopularActivities extends StatelessWidget {
       65,
       '4.6',
       'Relax & Unwind',
-      AppAssets.destinationBaa,
+      'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=900&q=85',
     ),
   ];
 
@@ -411,7 +444,11 @@ class _PopularActivities extends StatelessWidget {
               crossAxisCount: count,
               crossAxisSpacing: AppSpacing.sm,
               mainAxisSpacing: AppSpacing.smPlus,
-              childAspectRatio: count >= 3 ? 0.68 : 0.70,
+              mainAxisExtent: count == 2
+                  ? 360
+                  : count == 3
+                  ? 335
+                  : 320,
             ),
             itemBuilder: (_, index) => _ActivityCard(data: activities[index]),
           );
@@ -448,7 +485,7 @@ class _ActivityCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset(data.image, fit: BoxFit.cover),
+              NetworkImageWidget(url: data.image),
               Positioned(
                 left: 7,
                 top: 7,
@@ -465,7 +502,7 @@ class _ActivityCard extends StatelessWidget {
                     data.badge,
                     style: const TextStyle(
                       color: AppColors.white,
-                      fontSize: 8,
+                      fontSize: 10,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -477,16 +514,16 @@ class _ActivityCard extends StatelessWidget {
                 child: Icon(
                   Icons.favorite_border,
                   color: AppColors.white,
-                  size: 20,
+                  size: 24,
                 ),
               ),
             ],
           ),
         ),
         Expanded(
-          flex: 6,
+          flex: 7,
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -496,7 +533,7 @@ class _ActivityCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: AppColors.authNavy,
-                    fontSize: 11.5,
+                    fontSize: 14,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -507,23 +544,28 @@ class _ActivityCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: AppColors.dashboardBlue,
-                    fontSize: 8,
+                    fontSize: 10.5,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   '◷ ${data.duration}',
                   style: const TextStyle(
-                    color: AppColors.inputIcon,
-                    fontSize: 8,
+                    color: AppColors.slateDark,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   '⭐ ${data.rating}  (${data.price * 11} Reviews)',
+                  maxLines: 2,
                   style: const TextStyle(
-                    color: AppColors.inputIcon,
-                    fontSize: 8,
+                    color: AppColors.slateDark,
+                    fontSize: 12,
+                    height: 1.2,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const Spacer(),
@@ -535,7 +577,7 @@ class _ActivityCard extends StatelessWidget {
                         'From\n\$${data.price}',
                         style: const TextStyle(
                           color: AppColors.dashboardBlue,
-                          fontSize: 14,
+                          fontSize: 17,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -543,8 +585,9 @@ class _ActivityCard extends StatelessWidget {
                     const Text(
                       'Per Person',
                       style: TextStyle(
-                        color: AppColors.inputIcon,
-                        fontSize: 7.5,
+                        color: AppColors.slateDark,
+                        fontSize: 11.5,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ],
@@ -574,12 +617,15 @@ class _ActivityOfferBanner extends StatelessWidget {
     clipBehavior: Clip.antiAlias,
     child: Stack(
       children: [
-        Positioned(
+        const Positioned(
           right: 0,
           top: 0,
           bottom: 0,
           width: 180,
-          child: Image.asset(AppAssets.destinationMale, fit: BoxFit.cover),
+          child: NetworkImageWidget(
+            url:
+                'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85',
+          ),
         ),
         const Padding(
           padding: EdgeInsets.all(AppSpacing.compact),

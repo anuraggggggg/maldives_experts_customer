@@ -19,6 +19,11 @@ class AppBottomNavigation extends StatelessWidget {
   static const _items = <_NavigationItem>[
     _NavigationItem(AppStrings.home, Icons.home_outlined, Icons.home_rounded),
     _NavigationItem(
+      AppStrings.search,
+      Icons.search_rounded,
+      Icons.search_rounded,
+    ),
+    _NavigationItem(
       AppStrings.myTrips,
       Icons.luggage_outlined,
       Icons.luggage_rounded,
@@ -27,11 +32,6 @@ class AppBottomNavigation extends StatelessWidget {
       AppStrings.wishlist,
       Icons.favorite_border_rounded,
       Icons.favorite_rounded,
-    ),
-    _NavigationItem(
-      AppStrings.enquiries,
-      Icons.chat_bubble_outline_rounded,
-      Icons.chat_bubble_rounded,
     ),
     _NavigationItem(
       AppStrings.profile,

@@ -10,11 +10,16 @@ import '../../providers/auth_provider.dart';
 import '../../views/auth/login_screen.dart';
 import '../../views/home/home_screen.dart';
 import '../../views/home/offers_screen.dart';
+import '../../views/home/popular_destinations_screen.dart';
 import '../../views/home/resorts_screen.dart';
 import '../../views/home/activities_screen.dart';
+import '../../views/home/drawer_screens.dart';
+import '../../views/search/filters_screen.dart';
+import '../../views/search/saved_searches_screen.dart';
+import '../../views/trips/my_trips_screen.dart';
+import '../../views/wishlist/wishlist_screen.dart';
+import '../../views/profile/profile_screen.dart';
 import '../../views/splash/splash_screen.dart';
-import '../../views/static/placeholder_screen.dart';
-import '../constants/app_strings.dart';
 import '../services/navigation_service.dart';
 import '../widgets/app_bottom_navigation.dart';
 import 'route_names.dart';
@@ -88,6 +93,11 @@ class AppRouter {
         pageBuilder: (_, state) =>
             _cupertinoPage(state, const ResetPasswordScreen()),
       ),
+      GoRoute(
+        path: '/filters',
+        name: RouteNames.filters,
+        pageBuilder: (_, state) => _cupertinoPage(state, const FiltersScreen()),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (_, __, navigationShell) =>
             AppNavigationShell(navigationShell: navigationShell),
@@ -118,46 +128,89 @@ class AppRouter {
                     pageBuilder: (_, state) =>
                         _cupertinoPage(state, const ActivitiesScreen()),
                   ),
+                  GoRoute(
+                    path: 'featured-resorts',
+                    name: RouteNames.featuredResorts,
+                    pageBuilder: (_, state) =>
+                        _cupertinoPage(state, const ResortsScreen()),
+                  ),
+                  GoRoute(
+                    path: 'popular-resorts',
+                    name: RouteNames.popularResorts,
+                    pageBuilder: (_, state) => _cupertinoPage(
+                      state,
+                      const PopularDestinationsScreen(),
+                    ),
+                  ),
+                  GoRoute(
+                    path: 'latest-blogs',
+                    name: RouteNames.latestBlogs,
+                    pageBuilder: (_, state) =>
+                        _cupertinoPage(state, const LatestBlogsScreen()),
+                  ),
+                  GoRoute(
+                    path: 'travel-guides',
+                    name: RouteNames.travelGuides,
+                    pageBuilder: (_, state) =>
+                        _cupertinoPage(state, const TravelGuidesScreen()),
+                  ),
+                  GoRoute(
+                    path: 'search-holidays',
+                    name: RouteNames.searchHolidays,
+                    pageBuilder: (_, state) =>
+                        _cupertinoPage(state, const SearchHolidaysScreen()),
+                  ),
+                  GoRoute(
+                    path: 'recent-searches',
+                    name: RouteNames.recentSearches,
+                    pageBuilder: (_, state) =>
+                        _cupertinoPage(state, const RecentSearchesScreen()),
+                  ),
                 ],
               ),
             ],
           ),
-          _placeholderBranch(
-            '/my-trips',
-            RouteNames.myTrips,
-            '${AppStrings.myTrips} Page',
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/search',
+                name: RouteNames.search,
+                pageBuilder: (_, state) =>
+                    _cupertinoPage(state, const SavedSearchesScreen()),
+              ),
+            ],
           ),
-          _placeholderBranch(
-            '/wishlist',
-            RouteNames.wishlist,
-            '${AppStrings.wishlist} Page',
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/my-trips',
+                name: RouteNames.myTrips,
+                pageBuilder: (_, state) =>
+                    _cupertinoPage(state, const MyTripsScreen()),
+              ),
+            ],
           ),
-          _placeholderBranch(
-            '/enquiries',
-            RouteNames.enquiries,
-            '${AppStrings.enquiries} Page',
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/wishlist',
+                name: RouteNames.wishlist,
+                pageBuilder: (_, state) =>
+                    _cupertinoPage(state, const WishlistScreen()),
+              ),
+            ],
           ),
-          _placeholderBranch(
-            '/profile',
-            RouteNames.profile,
-            '${AppStrings.profile} Page',
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/profile',
+                name: RouteNames.profile,
+                pageBuilder: (_, state) =>
+                    _cupertinoPage(state, const ProfileScreen()),
+              ),
+            ],
           ),
         ],
-      ),
-    ],
-  );
-
-  static StatefulShellBranch _placeholderBranch(
-    String path,
-    String name,
-    String title,
-  ) => StatefulShellBranch(
-    routes: [
-      GoRoute(
-        path: path,
-        name: name,
-        pageBuilder: (_, state) =>
-            _cupertinoPage(state, PlaceholderScreen(title: title)),
       ),
     ],
   );
@@ -171,16 +224,24 @@ class AppNavigationShell extends StatelessWidget {
 
   final StatefulNavigationShell navigationShell;
 
+  static const _branchLocations = <String>[
+    '/home',
+    '/search',
+    '/my-trips',
+    '/wishlist',
+    '/profile',
+  ];
+
   @override
   Widget build(BuildContext context) => Scaffold(
     extendBody: true,
     body: navigationShell,
     bottomNavigationBar: AppBottomNavigation(
       currentIndex: navigationShell.currentIndex,
-      onSelected: (index) => navigationShell.goBranch(
-        index,
-        initialLocation: index == navigationShell.currentIndex,
-      ),
+      onSelected: (index) {
+        if (index < 0 || index >= _branchLocations.length) return;
+        context.go(_branchLocations[index]);
+      },
     ),
   );
 }

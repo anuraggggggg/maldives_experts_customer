@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../core/widgets/app_drawer.dart';
 import 'widgets/destination_section.dart';
 import 'widgets/dashboard_swipe_navigator.dart';
 import 'widgets/feature_shortcuts.dart';
@@ -50,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen>
     value: SystemUiOverlayStyle.light,
     child: Scaffold(
       backgroundColor: AppColors.white,
+      drawer: const AppDrawer(),
       body: DashboardSwipeNavigator(
         currentPage: DashboardPage.packages,
         child: FadeTransition(

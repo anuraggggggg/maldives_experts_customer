@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../core/constants/app_assets.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../core/widgets/app_drawer.dart';
+import '../../core/widgets/network_image_widget.dart';
 import 'widgets/booking_benefits.dart';
 import 'widgets/dashboard_category_tabs.dart';
 import 'widgets/dashboard_inner_header.dart';
@@ -14,45 +15,53 @@ class ResortsScreen extends StatelessWidget {
   const ResortsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => AnnotatedRegion<SystemUiOverlayStyle>(
-    value: SystemUiOverlayStyle.light,
-    child: Scaffold(
-      backgroundColor: AppColors.white,
-      body: DashboardSwipeNavigator(
-        currentPage: DashboardPage.resorts,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              const DashboardInnerHeader(
-                title: 'Featured Resorts',
-                subtitle:
-                    'Handpicked luxury resorts for your perfect stay\nin the Maldives',
-              ),
-              Transform.translate(
-                offset: const Offset(0, -18),
-                child: const _ResortSearchPanel(),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppSpacing.content),
-                child: BookingBenefits(),
-              ),
-              const SizedBox(height: AppSpacing.md),
-              const SectionHeader(
-                title: 'Top Rated Resorts',
-                actionLabel: 'View All Resorts',
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              const _ResortGrid(),
-              const SizedBox(height: AppSpacing.md),
-              const _ExpertBanner(),
-              const SizedBox(height: AppSpacing.bottomNavClearance),
-            ],
+  Widget build(BuildContext context) {
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        key: scaffoldKey,
+        drawer: const AppDrawer(),
+        backgroundColor: AppColors.white,
+        body: DashboardSwipeNavigator(
+          currentPage: DashboardPage.resorts,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                DashboardInnerHeader(
+                  title: 'Featured Resorts',
+                  subtitle:
+                      'Handpicked luxury resorts for your perfect stay\nin the Maldives',
+                  backgroundImageUrl:
+                      'https://images.unsplash.com/photo-1573843981267-be1999ff37cd?auto=format&fit=crop&w=1800&q=90',
+                  onMenuPressed: () => scaffoldKey.currentState?.openDrawer(),
+                ),
+                Transform.translate(
+                  offset: const Offset(0, -18),
+                  child: const _ResortSearchPanel(),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: AppSpacing.content),
+                  child: BookingBenefits(),
+                ),
+                const SizedBox(height: AppSpacing.md),
+                const SectionHeader(
+                  title: 'Top Rated Resorts',
+                  actionLabel: 'View All Resorts',
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                const _ResortGrid(),
+                const SizedBox(height: AppSpacing.md),
+                const _ExpertBanner(),
+                const SizedBox(height: AppSpacing.bottomNavClearance),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class _ResortSearchPanel extends StatelessWidget {
@@ -77,61 +86,95 @@ class _ResortSearchPanel extends StatelessWidget {
       children: [
         DashboardCategoryTabs(selected: DashboardCategory.resorts),
         SizedBox(height: AppSpacing.smPlus),
-        Row(
-          children: [
-            Expanded(
-              child: _ResortField(
-                icon: Icons.location_on_outlined,
-                label: 'Where do you want to go?',
-                value: 'Malé Atoll',
-              ),
-            ),
-            SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: _ResortField(
-                icon: Icons.calendar_month_outlined,
-                label: 'Check-in – Check-out',
-                value: '20 May 2025 – 24 May 2025',
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: AppSpacing.sm),
-        Row(
-          children: [
-            Expanded(
-              child: _ResortField(
-                icon: Icons.payments_outlined,
-                label: 'Budget (per night)',
-                value: 'Any Budget',
-              ),
-            ),
-            SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: _ResortField(
-                icon: Icons.bed_outlined,
-                label: 'Room & Meal Plan',
-                value: '1 Room • All Meal Plans',
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: AppSpacing.sm),
-        Row(
-          children: [
-            Expanded(
-              child: _ResortField(
-                icon: Icons.person_outline_rounded,
-                label: 'Guests',
-                value: '2 Adults • 0 Children',
-              ),
-            ),
-            SizedBox(width: AppSpacing.sm),
-            Expanded(child: _SearchResortsButton()),
-          ],
-        ),
+        _ResponsiveResortFields(),
       ],
     ),
+  );
+}
+
+class _ResponsiveResortFields extends StatelessWidget {
+  const _ResponsiveResortFields();
+
+  static const fields = [
+    _ResortField(
+      icon: Icons.location_on_outlined,
+      label: 'Where do you want to go?',
+      value: 'Malé Atoll',
+    ),
+    _ResortField(
+      icon: Icons.calendar_month_outlined,
+      label: 'Check-in – Check-out',
+      value: '20 May 2025 – 24 May 2025',
+    ),
+    _ResortField(
+      icon: Icons.person_outline_rounded,
+      label: 'Guests',
+      value: '2 Adults • 0 Children',
+    ),
+    _ResortField(
+      icon: Icons.payments_outlined,
+      label: 'Budget (per night)',
+      value: 'Any Budget',
+    ),
+    _ResortField(
+      icon: Icons.bed_outlined,
+      label: 'Room & Meal Plan',
+      value: '1 Room • All Meal Plans',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, constraints) {
+      if (constraints.maxWidth >= 650) {
+        return Column(
+          children: [
+            Row(
+              children: [
+                Expanded(child: fields[0]),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(child: fields[1]),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(child: fields[2]),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Row(
+              children: [
+                Expanded(child: fields[3]),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(child: fields[4]),
+                const SizedBox(width: AppSpacing.sm),
+                const Expanded(child: _SearchResortsButton()),
+              ],
+            ),
+          ],
+        );
+      }
+      return Column(
+        children: [
+          fields[0],
+          const SizedBox(height: AppSpacing.sm),
+          Row(
+            children: [
+              Expanded(child: fields[1]),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(child: fields[2]),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Row(
+            children: [
+              Expanded(child: fields[3]),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(child: fields[4]),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          const _SearchResortsButton(),
+        ],
+      );
+    },
   );
 }
 
@@ -168,7 +211,7 @@ class _ResortField extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  fontSize: 8.5,
+                  fontSize: 10,
                   color: AppColors.inputIcon,
                 ),
               ),
@@ -178,7 +221,7 @@ class _ResortField extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  fontSize: 10.5,
+                  fontSize: 12,
                   color: AppColors.authNavy,
                   fontWeight: FontWeight.w700,
                 ),
@@ -242,7 +285,7 @@ class _ResortGrid extends StatelessWidget {
       1299,
       '4.8',
       'Best Seller',
-      AppAssets.destinationRaa,
+      'https://images.unsplash.com/photo-1540202404-a2f29016b523?auto=format&fit=crop&w=900&q=85',
     ),
     _ResortData(
       'Conrad Maldives Rangali Island',
@@ -250,7 +293,7 @@ class _ResortGrid extends StatelessWidget {
       2499,
       '4.9',
       'Luxury Pick',
-      AppAssets.dashboardHero,
+      'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=85',
     ),
     _ResortData(
       'Kudadoo Maldives',
@@ -258,7 +301,7 @@ class _ResortGrid extends StatelessWidget {
       1799,
       '4.7',
       'Great Value',
-      AppAssets.destinationBaa,
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=85',
     ),
     _ResortData(
       'Kurumba Maldives',
@@ -266,7 +309,7 @@ class _ResortGrid extends StatelessWidget {
       899,
       '4.5',
       'Family Favorite',
-      AppAssets.destinationMale,
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=85',
     ),
     _ResortData(
       'Nova Maldives',
@@ -274,7 +317,7 @@ class _ResortGrid extends StatelessWidget {
       1199,
       '4.6',
       'New Arrival',
-      AppAssets.destinationRaa,
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=85',
     ),
     _ResortData(
       'Soneva Fushi',
@@ -282,7 +325,7 @@ class _ResortGrid extends StatelessWidget {
       2899,
       '4.9',
       'Eco Friendly',
-      AppAssets.destinationBaa,
+      'https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=900&q=85',
     ),
   ];
 
@@ -299,7 +342,7 @@ class _ResortGrid extends StatelessWidget {
           crossAxisCount: count,
           crossAxisSpacing: AppSpacing.sm,
           mainAxisSpacing: AppSpacing.smPlus,
-          childAspectRatio: count == 3 ? 0.68 : 0.72,
+          mainAxisExtent: count == 3 ? 390 : 360,
         ),
         itemBuilder: (_, index) => _ResortCard(data: resorts[index]),
       );
@@ -334,7 +377,7 @@ class _ResortCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset(data.image, fit: BoxFit.cover),
+              NetworkImageWidget(url: data.image),
               Positioned(
                 left: 7,
                 top: 7,
@@ -351,7 +394,7 @@ class _ResortCard extends StatelessWidget {
                     data.badge,
                     style: const TextStyle(
                       color: AppColors.white,
-                      fontSize: 8,
+                      fontSize: 10,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -363,16 +406,16 @@ class _ResortCard extends StatelessWidget {
                 child: Icon(
                   Icons.favorite_border,
                   color: AppColors.white,
-                  size: 21,
+                  size: 25,
                 ),
               ),
             ],
           ),
         ),
         Expanded(
-          flex: 6,
+          flex: 7,
           child: Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -382,7 +425,7 @@ class _ResortCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: AppColors.authNavy,
-                    fontSize: 12,
+                    fontSize: 15,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -393,7 +436,8 @@ class _ResortCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: AppColors.dashboardBlue,
-                    fontSize: 8,
+                    fontSize: 10.5,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const SizedBox(height: 5),
@@ -409,7 +453,8 @@ class _ResortCard extends StatelessWidget {
                   '⭐ ${data.rating}  Excellent',
                   style: const TextStyle(
                     color: AppColors.inputIcon,
-                    fontSize: 8.5,
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 const Spacer(),
@@ -421,7 +466,7 @@ class _ResortCard extends StatelessWidget {
                         maxLines: 2,
                         style: const TextStyle(
                           color: AppColors.dashboardBlue,
-                          fontSize: 11,
+                          fontSize: 16,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -439,7 +484,7 @@ class _ResortCard extends StatelessWidget {
                         'View Details',
                         style: TextStyle(
                           color: AppColors.dashboardBlue,
-                          fontSize: 7.5,
+                          fontSize: 10.5,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -469,7 +514,11 @@ class _ResortTag extends StatelessWidget {
     ),
     child: Text(
       label,
-      style: const TextStyle(color: AppColors.successDark, fontSize: 7),
+      style: const TextStyle(
+        color: AppColors.successDark,
+        fontSize: 9.5,
+        fontWeight: FontWeight.w600,
+      ),
     ),
   );
 }

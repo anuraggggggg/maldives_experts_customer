@@ -9,6 +9,14 @@ abstract final class RouteNames {
   static const resorts = 'resorts';
   static const offers = 'offers';
   static const activities = 'activities';
+  static const featuredResorts = 'featuredResorts';
+  static const popularResorts = 'popularResorts';
+  static const latestBlogs = 'latestBlogs';
+  static const travelGuides = 'travelGuides';
+  static const searchHolidays = 'searchHolidays';
+  static const recentSearches = 'recentSearches';
+  static const search = 'search';
+  static const filters = 'filters';
   static const myTrips = 'myTrips';
   static const wishlist = 'wishlist';
   static const enquiries = 'enquiries';

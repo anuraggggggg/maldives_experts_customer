@@ -48,7 +48,10 @@ class HomeHeader extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const _HeaderIcon(icon: Icons.menu_rounded),
+                    _HeaderIcon(
+                      icon: Icons.menu_rounded,
+                      onPressed: () => Scaffold.of(context).openDrawer(),
+                    ),
                     const Spacer(),
                     const Hero(
                       tag: 'dashboard-brand-logo',
@@ -112,13 +115,14 @@ class HomeHeader extends StatelessWidget {
 }
 
 class _HeaderIcon extends StatelessWidget {
-  const _HeaderIcon({required this.icon});
+  const _HeaderIcon({required this.icon, this.onPressed});
 
   final IconData icon;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) => IconButton(
-    onPressed: () {},
+    onPressed: onPressed ?? () {},
     icon: Icon(icon, color: AppColors.white, size: 32),
     padding: EdgeInsets.zero,
     constraints: const BoxConstraints.tightFor(width: 42, height: 42),
