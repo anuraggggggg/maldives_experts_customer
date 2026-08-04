@@ -108,7 +108,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                 Text(
                                   'EXPERTISE • EXPERIENCE • EXCELLENCE',
                                   style: TextStyle(
-                                    fontSize: 8,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w700,
                                     color: AppColors.authNavy,
                                     letterSpacing: 1.5,
@@ -173,7 +173,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       'No worries! Enter your registered email or mobile number and we’ll send you a reset link to create a new password.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 14,
                         color: AppColors.slate,
                         height: 1.4,
                       ),
@@ -203,7 +203,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         const Text(
                           'Email or Mobile Number',
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 14,
                             fontWeight: FontWeight.w700,
                             color: AppColors.authNavy,
                           ),
@@ -220,7 +220,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter your email or mobile number',
                             hintStyle: const TextStyle(
-                              fontSize: 13,
+                              fontSize: 14,
                               color: AppColors.inputHint,
                             ),
                             prefixIcon: const Icon(
@@ -297,7 +297,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                                     'Send Reset Link',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 15,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -329,7 +329,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               child: Text(
                                 'We will send a secure password reset link to your registered email or mobile number.',
                                 style: TextStyle(
-                                  fontSize: 11,
+                                  fontSize: 12,
                                   color: AppColors.slate,
                                   height: 1.3,
                                 ),
@@ -378,7 +378,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               Text(
                                 "Didn't receive the email?",
                                 style: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w700,
                                   color: AppColors.authNavy,
                                 ),
@@ -387,7 +387,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               Text(
                                 'Check your spam folder or try again after a few minutes.',
                                 style: TextStyle(
-                                  fontSize: 11,
+                                  fontSize: 12,
                                   color: AppColors.slate,
                                 ),
                               ),
@@ -507,7 +507,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                               Text(
                                 'We never share your information with anyone.\nYour data is 100% secure with us.',
                                 style: TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 12,
                                   color: AppColors.slate,
                                   height: 1.3,
                                 ),

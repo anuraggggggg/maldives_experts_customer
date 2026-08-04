@@ -31,7 +31,7 @@ class SectionHeader extends StatelessWidget {
               style: const TextStyle(
                 color: AppColors.dashboardBlue,
                 fontWeight: FontWeight.w700,
-                fontSize: 13,
+                fontSize: 14,
               ),
             ),
             icon: const Icon(

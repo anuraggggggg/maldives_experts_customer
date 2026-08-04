@@ -160,7 +160,7 @@ class _OfferContent extends StatelessWidget {
                       color: index == 0
                           ? AppColors.white
                           : AppColors.navInactive,
-                      fontSize: 11,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -198,7 +198,7 @@ class _OfferCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    height: 190,
+    height: 200,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(AppSpacing.sm),
     ),
@@ -229,7 +229,7 @@ class _OfferCard extends StatelessWidget {
                 data.kicker,
                 style: const TextStyle(
                   color: AppColors.yellow,
-                  fontSize: 10,
+                  fontSize: 12,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -251,7 +251,7 @@ class _OfferCard extends StatelessWidget {
               const SizedBox(height: 7),
               Text(
                 data.detail,
-                style: const TextStyle(color: AppColors.white, fontSize: 9.5),
+                style: const TextStyle(color: AppColors.white, fontSize: 12),
               ),
               const Spacer(),
               Container(
@@ -270,7 +270,7 @@ class _OfferCard extends StatelessWidget {
                       data.button,
                       style: const TextStyle(
                         color: AppColors.authNavy,
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -351,13 +351,13 @@ class _ExtraBenefits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: 120,
+    height: 140,
     child: ListView.separated(
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
       separatorBuilder: (_, __) => const SizedBox(width: AppSpacing.sm),
       itemBuilder: (_, index) => Container(
-        width: 145,
+        width: 180,
         padding: const EdgeInsets.all(AppSpacing.smPlus),
         decoration: BoxDecoration(
           color: items[index].$4,
@@ -376,7 +376,7 @@ class _ExtraBenefits extends StatelessWidget {
                     items[index].$1,
                     style: const TextStyle(
                       color: AppColors.authNavy,
-                      fontSize: 10,
+                      fontSize: 12,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -385,7 +385,7 @@ class _ExtraBenefits extends StatelessWidget {
                     items[index].$2,
                     style: const TextStyle(
                       color: AppColors.inputIcon,
-                      fontSize: 8,
+                      fontSize: 12,
                     ),
                   ),
                 ],
@@ -435,7 +435,7 @@ class _SubscribeBanner extends StatelessWidget {
               ),
               Text(
                 'Subscribe to get exclusive offers and updates',
-                style: TextStyle(color: AppColors.inputIcon, fontSize: 10),
+                style: TextStyle(color: AppColors.inputIcon, fontSize: 12),
               ),
             ],
           ),

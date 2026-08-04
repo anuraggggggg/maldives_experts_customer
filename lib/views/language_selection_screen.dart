@@ -160,7 +160,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                     'Select your preferred language to get started',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 14,
                       color: AppColors.inputIcon,
                       height: 1.2,
                     ),
@@ -264,7 +264,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: AppColors.inputIcon,
-                          fontSize: 11,
+                          fontSize: 12,
                         ),
                       ),
                     ],
@@ -353,7 +353,7 @@ class _LanguageTile extends StatelessWidget {
                       Text(
                         language.englishName,
                         style: const TextStyle(
-                          fontSize: 11,
+                          fontSize: 12,
                           color: AppColors.inactive,
                           fontWeight: FontWeight.w500,
                         ),

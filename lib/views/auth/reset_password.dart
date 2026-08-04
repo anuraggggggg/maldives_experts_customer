@@ -114,7 +114,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 Text(
                                   'EXPERTISE • EXPERIENCE • EXCELLENCE',
                                   style: TextStyle(
-                                    fontSize: 8,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w700,
                                     color: AppColors.authNavy,
                                     letterSpacing: 1.5,
@@ -198,7 +198,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     'Create a new strong password for your account\nto keep it secure.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 14,
                       color: AppColors.slate,
                       height: 1.4,
                     ),
@@ -228,7 +228,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         const Text(
                           'New Password',
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 14,
                             fontWeight: FontWeight.w700,
                             color: AppColors.authNavy,
                           ),
@@ -244,7 +244,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           decoration: InputDecoration(
                             hintText: 'Enter your new password',
                             hintStyle: const TextStyle(
-                              fontSize: 13,
+                              fontSize: 14,
                               color: AppColors.inputHint,
                             ),
                             prefixIcon: const Icon(
@@ -302,14 +302,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             const Text(
                               'Password strength: ',
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 12,
                                 color: AppColors.slate,
                               ),
                             ),
                             const Text(
                               'Strong',
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w700,
                                 color: AppColors.successBright,
                               ),
@@ -343,7 +343,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         const Text(
                           'Use at least 8 characters with a mix of letters, numbers & symbols',
                           style: TextStyle(
-                            fontSize: 11,
+                            fontSize: 12,
                             color: AppColors.inputHint,
                           ),
                         ),
@@ -354,7 +354,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         const Text(
                           'Confirm New Password',
                           style: TextStyle(
-                            fontSize: 13,
+                            fontSize: 14,
                             fontWeight: FontWeight.w700,
                             color: AppColors.authNavy,
                           ),
@@ -370,7 +370,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           decoration: InputDecoration(
                             hintText: 'Confirm your new password',
                             hintStyle: const TextStyle(
-                              fontSize: 13,
+                              fontSize: 14,
                               color: AppColors.inputHint,
                             ),
                             prefixIcon: const Icon(
@@ -459,7 +459,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                     'Reset Password',
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 15,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),
@@ -500,7 +500,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 Text(
                                   'Your password will be updated securely.',
                                   style: TextStyle(
-                                    fontSize: 11,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                     color: AppColors.authNavy,
                                   ),
@@ -508,7 +508,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                                 Text(
                                   'You will be redirected to login.',
                                   style: TextStyle(
-                                    fontSize: 11,
+                                    fontSize: 12,
                                     color: AppColors.slate,
                                   ),
                                 ),
@@ -563,7 +563,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               Text(
                                 "Don't share your password with anyone.\nWe never ask for your password.",
                                 style: TextStyle(
-                                  fontSize: 11,
+                                  fontSize: 12,
                                   color: AppColors.slate,
                                   height: 1.3,
                                 ),

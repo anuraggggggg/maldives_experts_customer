@@ -171,14 +171,14 @@ class _DrawerHeader extends StatelessWidget {
                     'John Doe',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 15,
+                      fontSize: 16,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
                   SizedBox(height: 2),
                   Text(
                     'user@gmail.com',
-                    style: TextStyle(color: Color(0xFFDCEBFF), fontSize: 11),
+                    style: TextStyle(color: Color(0xFFDCEBFF), fontSize: 12),
                   ),
                 ],
               ),

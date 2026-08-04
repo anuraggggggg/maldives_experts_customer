@@ -115,7 +115,7 @@ class OfferBanner extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: AppColors.white,
-                  fontSize: 11,
+                  fontSize: 12,
                   height: 1.05,
                   fontWeight: FontWeight.w700,
                 ),

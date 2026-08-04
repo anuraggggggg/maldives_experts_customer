@@ -88,7 +88,7 @@ class OnboardingAdScreen extends StatelessWidget {
                               Text(
                                 'EXPERTISE • EXPERIENCE • EXCELLENCE',
                                 style: TextStyle(
-                                  fontSize: 9,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.authNavy,
                                   letterSpacing: 1.5,
@@ -162,7 +162,7 @@ class OnboardingAdScreen extends StatelessWidget {
                     'Discover the breathtaking beauty of Maldives with curated packages, luxury resorts, exciting activities and unforgettable experiences.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 14,
                       color: AppColors.slateDark,
                       height: 1.35,
                     ),
@@ -172,7 +172,7 @@ class OnboardingAdScreen extends StatelessWidget {
                     'We make every journey exceptional.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 13,
+                      fontSize: 14,
                       fontWeight: FontWeight.w800,
                       color: AppColors.authNavy,
                     ),
@@ -356,7 +356,7 @@ class _FeatureItem extends StatelessWidget {
           subtitle,
           textAlign: TextAlign.center,
           style: const TextStyle(
-            fontSize: 10,
+            fontSize: 12,
             color: AppColors.slate,
             height: 1.2,
           ),

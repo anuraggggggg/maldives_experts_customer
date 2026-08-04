@@ -239,7 +239,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                           value: value,
                           child: Text(
                             value,
-                            style: const TextStyle(fontSize: 13),
+                            style: const TextStyle(fontSize: 14),
                           ),
                         ),
                       )
@@ -342,7 +342,7 @@ class _BottomActions extends StatelessWidget {
         foregroundColor: _FilterColors.blue,
         minimumSize: const Size(0, 50),
         side: const BorderSide(color: _FilterColors.blue),
-        textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
       ),
     );
     final apply = FilledButton.icon(
@@ -352,7 +352,7 @@ class _BottomActions extends StatelessWidget {
       style: FilledButton.styleFrom(
         backgroundColor: _FilterColors.blue,
         minimumSize: const Size(0, 50),
-        textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+        textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
       ),
     );
 
@@ -444,7 +444,7 @@ class _SummaryItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: _FilterColors.navy,
-                  fontSize: 11.5,
+                  fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -452,7 +452,7 @@ class _SummaryItem extends StatelessWidget {
                 label,
                 style: const TextStyle(
                   color: _FilterColors.muted,
-                  fontSize: 10.5,
+                  fontSize: 12,
                 ),
               ),
             ],
@@ -640,7 +640,7 @@ abstract final class _FilterText {
   );
   static const label = TextStyle(
     color: _FilterColors.navy,
-    fontSize: 12.5,
+    fontSize: 14,
     fontWeight: FontWeight.w600,
   );
 }

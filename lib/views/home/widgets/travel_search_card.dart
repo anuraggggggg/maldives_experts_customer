@@ -169,7 +169,7 @@ class _CategoryTab extends StatelessWidget {
                 color: selected
                     ? AppColors.dashboardBlue
                     : AppColors.navInactive,
-                fontSize: 12.5,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -207,7 +207,7 @@ class _SearchField extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: AppColors.navInactive,
-              fontSize: 13,
+              fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
           ),

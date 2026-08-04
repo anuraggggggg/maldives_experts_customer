@@ -248,7 +248,7 @@ class SearchHolidaysScreen extends StatelessWidget {
                 style: TextButton.styleFrom(
                   foregroundColor: Colors.white,
                   textStyle: const TextStyle(
-                    fontSize: 15,
+                    fontSize: 16,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -418,7 +418,7 @@ class _ResortResultCard extends StatelessWidget {
                   data.description,
                   style: const TextStyle(
                     color: AppColors.dashboardBlue,
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -454,7 +454,7 @@ class _ArticleCard extends StatelessWidget {
                 data.meta,
                 style: const TextStyle(
                   color: AppColors.dashboardBlue,
-                  fontSize: 11,
+                  fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -543,7 +543,7 @@ class _SearchField extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: const TextStyle(color: AppColors.slate, fontSize: 9.5),
+                style: const TextStyle(color: AppColors.slate, fontSize: 12),
               ),
               const SizedBox(height: 2),
               Text(
@@ -552,7 +552,7 @@ class _SearchField extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: AppColors.authNavy,
-                  fontSize: 11.5,
+                  fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -608,10 +608,7 @@ class _RecentCard extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 time,
-                style: const TextStyle(
-                  color: AppColors.inactive,
-                  fontSize: 9.5,
-                ),
+                style: const TextStyle(color: AppColors.inactive, fontSize: 12),
               ),
             ],
           ),
@@ -659,7 +656,7 @@ abstract final class _PageText {
   );
   static const meta = TextStyle(
     color: AppColors.slate,
-    fontSize: 11,
+    fontSize: 12,
     height: 1.35,
   );
 }

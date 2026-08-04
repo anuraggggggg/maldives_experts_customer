@@ -119,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const Text(
                     'Made with love for unforgettable Maldives holidays',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: _ProfileColors.muted, fontSize: 11),
+                    style: TextStyle(color: _ProfileColors.muted, fontSize: 12),
                   ),
                 ],
               ),
@@ -202,7 +202,7 @@ class _Header extends StatelessWidget {
                   '3',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 11,
+                    fontSize: 12,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -299,7 +299,7 @@ class _ProfileCard extends StatelessWidget {
               SizedBox(height: 4),
               Text(
                 'user@gmail.com',
-                style: TextStyle(color: Color(0xFFDCEBFF), fontSize: 12.5),
+                style: TextStyle(color: Color(0xFFDCEBFF), fontSize: 14),
               ),
               SizedBox(height: 9),
               _MemberBadge(),
@@ -338,7 +338,7 @@ class _MemberBadge extends StatelessWidget {
           'Gold Member',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 10.5,
+            fontSize: 12,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -598,18 +598,18 @@ abstract final class _ProfileText {
   static const subtitle = TextStyle(color: _ProfileColors.muted, fontSize: 14);
   static const sectionTitle = TextStyle(
     color: _ProfileColors.navy,
-    fontSize: 15.5,
+    fontSize: 16,
     fontWeight: FontWeight.w800,
   );
   static const tileTitle = TextStyle(
     color: _ProfileColors.navy,
-    fontSize: 13.5,
+    fontSize: 14,
     fontWeight: FontWeight.w700,
   );
-  static const caption = TextStyle(color: _ProfileColors.muted, fontSize: 11);
+  static const caption = TextStyle(color: _ProfileColors.muted, fontSize: 12);
   static const trailing = TextStyle(
     color: _ProfileColors.muted,
-    fontSize: 11.5,
+    fontSize: 12,
     fontWeight: FontWeight.w600,
   );
 }

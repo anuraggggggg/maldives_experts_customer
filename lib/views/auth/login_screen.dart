@@ -154,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             : 'Sign up to start planning your dream\ngetaway to the Maldives 🌊',
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 15,
+                          fontSize: 16,
                           height: 1.35,
                           fontWeight: FontWeight.w500,
                         ),
@@ -373,7 +373,7 @@ class _LoginFormCard extends StatelessWidget {
                     'Forgot Password?',
                     style: TextStyle(
                       color: AppColors.authBlue,
-                      fontSize: 13,
+                      fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -403,7 +403,7 @@ class _LoginFormCard extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: AppColors.authNavy,
-                fontSize: 13,
+                fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -455,7 +455,7 @@ class _AuthTabBar extends StatelessWidget {
                           fontWeight: isLoginTab
                               ? FontWeight.w700
                               : FontWeight.w500,
-                          fontSize: 15,
+                          fontSize: 16,
                         ),
                       ),
                     ],
@@ -488,7 +488,7 @@ class _AuthTabBar extends StatelessWidget {
                           fontWeight: !isLoginTab
                               ? FontWeight.w700
                               : FontWeight.w500,
-                          fontSize: 15,
+                          fontSize: 16,
                         ),
                       ),
                     ],
@@ -533,7 +533,7 @@ class _OrDivider extends StatelessWidget {
           'OR',
           style: TextStyle(
             color: Colors.grey.shade500,
-            fontSize: 11,
+            fontSize: 12,
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -681,7 +681,7 @@ class _TrustBadge extends StatelessWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: AppColors.authNavy,
-            fontSize: 11,
+            fontSize: 12,
             fontWeight: FontWeight.w700,
           ),
         ),
@@ -691,7 +691,7 @@ class _TrustBadge extends StatelessWidget {
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: AppColors.inputIcon,
-            fontSize: 9,
+            fontSize: 12,
             height: 1.2,
           ),
         ),
@@ -709,7 +709,7 @@ class _TermsFooter extends StatelessWidget {
   Widget build(BuildContext context) => RichText(
     textAlign: TextAlign.center,
     text: TextSpan(
-      style: const TextStyle(color: AppColors.inputIcon, fontSize: 11),
+      style: const TextStyle(color: AppColors.inputIcon, fontSize: 12),
       children: [
         const TextSpan(text: 'By continuing, you agree to our '),
         TextSpan(

@@ -109,7 +109,7 @@ class DestinationCard extends StatelessWidget {
                       badge,
                       style: const TextStyle(
                         color: AppColors.white,
-                        fontSize: 9,
+                        fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -148,7 +148,7 @@ class DestinationCard extends StatelessWidget {
                     maxLines: 1,
                     style: const TextStyle(
                       color: AppColors.dashboardBlue,
-                      fontSize: 11,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

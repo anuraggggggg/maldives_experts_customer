@@ -211,7 +211,7 @@ class _ResortField extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                  fontSize: 10,
+                  fontSize: 12,
                   color: AppColors.inputIcon,
                 ),
               ),
@@ -342,7 +342,7 @@ class _ResortGrid extends StatelessWidget {
           crossAxisCount: count,
           crossAxisSpacing: AppSpacing.sm,
           mainAxisSpacing: AppSpacing.smPlus,
-          mainAxisExtent: count == 3 ? 390 : 360,
+          mainAxisExtent: count == 3 ? 402 : 372,
         ),
         itemBuilder: (_, index) => _ResortCard(data: resorts[index]),
       );
@@ -394,7 +394,7 @@ class _ResortCard extends StatelessWidget {
                     data.badge,
                     style: const TextStyle(
                       color: AppColors.white,
-                      fontSize: 10,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -425,7 +425,7 @@ class _ResortCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: AppColors.authNavy,
-                    fontSize: 15,
+                    fontSize: 16,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -436,7 +436,7 @@ class _ResortCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: AppColors.dashboardBlue,
-                    fontSize: 10.5,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -453,7 +453,7 @@ class _ResortCard extends StatelessWidget {
                   '⭐ ${data.rating}  Excellent',
                   style: const TextStyle(
                     color: AppColors.inputIcon,
-                    fontSize: 11.5,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -471,21 +471,25 @@ class _ResortCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 7,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.blueBorder),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: const Text(
-                        'View Details',
-                        style: TextStyle(
-                          color: AppColors.dashboardBlue,
-                          fontSize: 10.5,
-                          fontWeight: FontWeight.w700,
+                    Flexible(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 7,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.blueBorder),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Text(
+                          'View Details',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: AppColors.dashboardBlue,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
                     ),
@@ -516,7 +520,7 @@ class _ResortTag extends StatelessWidget {
       label,
       style: const TextStyle(
         color: AppColors.successDark,
-        fontSize: 9.5,
+        fontSize: 12,
         fontWeight: FontWeight.w600,
       ),
     ),
@@ -556,7 +560,7 @@ class _ExpertBanner extends StatelessWidget {
               ),
               Text(
                 'Our travel experts will help you find the perfect resort.',
-                style: TextStyle(color: AppColors.inputIcon, fontSize: 11),
+                style: TextStyle(color: AppColors.inputIcon, fontSize: 12),
               ),
             ],
           ),

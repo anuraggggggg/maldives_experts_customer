@@ -111,7 +111,7 @@ class _Header extends StatelessWidget {
               SizedBox(height: 7),
               Text(
                 'All your bookings in one place',
-                style: TextStyle(color: _TripColors.muted, fontSize: 15),
+                style: TextStyle(color: _TripColors.muted, fontSize: 16),
               ),
             ],
           ),
@@ -140,7 +140,7 @@ class _Header extends StatelessWidget {
                   '3',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 11,
+                    fontSize: 12,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
@@ -217,7 +217,7 @@ class _TripsTabs extends StatelessWidget {
                               '${tab.$2}',
                               style: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 10,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -266,21 +266,33 @@ class _NextTripCard extends StatelessWidget {
             children: [
               const Row(
                 children: [
-                  Text('Next Trip', style: _TripText.smallTitle),
-                  Spacer(),
-                  Text(
-                    '12 Days to go',
-                    style: TextStyle(
-                      color: _TripColors.green,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  Expanded(
+                    child: Text('Next Trip', style: _TripText.smallTitle),
                   ),
-                  SizedBox(width: 6),
-                  Icon(
-                    Icons.timer_outlined,
-                    color: _TripColors.green,
-                    size: 18,
+                  Flexible(
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerRight,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '12 Days to go',
+                            style: TextStyle(
+                              color: _TripColors.green,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          SizedBox(width: 6),
+                          Icon(
+                            Icons.timer_outlined,
+                            color: _TripColors.green,
+                            size: 18,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -483,7 +495,7 @@ class _QuickActions extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: _TripColors.navy,
-                          fontSize: 10.5,
+                          fontSize: 12,
                           height: 1.35,
                           fontWeight: FontWeight.w600,
                         ),
@@ -592,7 +604,7 @@ class _TripCard extends StatelessWidget {
                         'UPCOMING',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 8,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -663,15 +675,19 @@ class _TripCard extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: _TripColors.blue,
                   side: const BorderSide(color: _TripColors.blue),
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   minimumSize: const Size(0, 37),
                   shape: const StadiumBorder(),
                   textStyle: const TextStyle(
-                    fontSize: 11,
+                    fontSize: 12,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                child: const Text('View Trip'),
+                child: const Text(
+                  'View Trip',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),
@@ -720,7 +736,7 @@ class _OngoingTripCard extends StatelessWidget {
                         'ONGOING',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 8,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -769,7 +785,7 @@ class _OngoingTripCard extends StatelessWidget {
                     SizedBox(height: 4),
                     Text(
                       '✈  Enjoy your trip!',
-                      style: TextStyle(color: _TripColors.navy, fontSize: 8),
+                      style: TextStyle(color: _TripColors.navy, fontSize: 12),
                     ),
                   ],
                 ),
@@ -812,7 +828,7 @@ class _OngoingAction extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: const TextStyle(
             color: _TripColors.navy,
-            fontSize: 8.5,
+            fontSize: 12,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -836,7 +852,7 @@ class _InfoLine extends StatelessWidget {
           text,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: const TextStyle(color: _TripColors.muted, fontSize: 11.5),
+          style: const TextStyle(color: _TripColors.muted, fontSize: 12),
         ),
       ),
     ],
@@ -861,7 +877,7 @@ class _Detail extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
           color: valueColor ?? _TripColors.navy,
-          fontSize: 9.5,
+          fontSize: 12,
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -914,17 +930,17 @@ abstract final class _TripColors {
 abstract final class _TripText {
   static const smallTitle = TextStyle(
     color: _TripColors.navy,
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: FontWeight.w700,
   );
   static const cardTitle = TextStyle(
     color: _TripColors.navy,
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: FontWeight.w800,
   );
   static const caption = TextStyle(
     color: _TripColors.muted,
-    fontSize: 9,
+    fontSize: 12,
     fontWeight: FontWeight.w500,
   );
 }

@@ -71,7 +71,7 @@ class DashboardCategoryTabs extends StatelessWidget {
                           color: category == selected
                               ? AppColors.dashboardBlue
                               : AppColors.navInactive,
-                          fontSize: 12.5,
+                          fontSize: 14,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

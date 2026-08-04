@@ -57,7 +57,8 @@ class AppTextField extends StatelessWidget {
           filled: true,
           fillColor: AppColors.authFieldFill,
           contentPadding: const EdgeInsets.symmetric(
-            vertical: AppSpacing.regular,
+            horizontal: AppSpacing.md,
+            vertical: AppSpacing.md,
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppSpacing.radiusSm),

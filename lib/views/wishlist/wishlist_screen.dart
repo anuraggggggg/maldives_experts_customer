@@ -172,7 +172,7 @@ class _NotificationBadge extends StatelessWidget {
       '3',
       style: TextStyle(
         color: Colors.white,
-        fontSize: 11,
+        fontSize: 12,
         fontWeight: FontWeight.w800,
       ),
     ),
@@ -655,7 +655,7 @@ class _StatusBadge extends StatelessWidget {
       text,
       style: const TextStyle(
         color: Color(0xFF07883A),
-        fontSize: 10,
+        fontSize: 12,
         fontWeight: FontWeight.w700,
       ),
     ),
@@ -679,7 +679,7 @@ class _Feature extends StatelessWidget {
         textAlign: TextAlign.center,
         style: const TextStyle(
           color: _WishColors.muted,
-          fontSize: 8.5,
+          fontSize: 12,
           height: 1.15,
         ),
       ),
@@ -820,13 +820,13 @@ class _DestinationCard extends StatelessWidget {
         maxLines: 1,
         style: const TextStyle(
           color: _WishColors.navy,
-          fontSize: 11,
+          fontSize: 12,
           fontWeight: FontWeight.w800,
         ),
       ),
       Text(
         resorts,
-        style: const TextStyle(color: _WishColors.muted, fontSize: 10),
+        style: const TextStyle(color: _WishColors.muted, fontSize: 12),
       ),
     ],
   );
@@ -904,21 +904,21 @@ abstract final class _WishText {
   );
   static const cardTitle = TextStyle(
     color: _WishColors.navy,
-    fontSize: 15.5,
+    fontSize: 16,
     height: 1.15,
     fontWeight: FontWeight.w800,
   );
   static const smallLabel = TextStyle(
     color: _WishColors.navy,
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: FontWeight.w600,
   );
   static const tinyLabel = TextStyle(
     color: _WishColors.navy,
-    fontSize: 9.5,
+    fontSize: 12,
     fontWeight: FontWeight.w600,
   );
-  static const meta = TextStyle(color: _WishColors.muted, fontSize: 10.5);
+  static const meta = TextStyle(color: _WishColors.muted, fontSize: 12);
 }
 
 abstract final class _WishDecor {
@@ -947,6 +947,6 @@ abstract final class _WishButton {
     padding: const EdgeInsets.symmetric(horizontal: 12),
     side: const BorderSide(color: _WishColors.blue),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-    textStyle: const TextStyle(fontSize: 10.5, fontWeight: FontWeight.w700),
+    textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
   );
 }

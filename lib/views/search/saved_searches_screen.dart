@@ -174,7 +174,7 @@ class _SavedSearchesScreenState extends State<SavedSearchesScreen> {
                             onChanged: (_) {},
                             style: const TextStyle(
                               color: _SearchColors.muted,
-                              fontSize: 11,
+                              fontSize: 12,
                             ),
                             isDense: true,
                           ),
@@ -444,7 +444,7 @@ class _SavedSearchCard extends StatelessWidget {
                 search.saved,
                 style: const TextStyle(
                   color: _SearchColors.muted,
-                  fontSize: 8.5,
+                  fontSize: 12,
                 ),
               ),
               const SizedBox(height: 19),
@@ -512,7 +512,7 @@ class _MiniButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         foregroundColor: _SearchColors.navy,
         side: const BorderSide(color: _SearchColors.border),
-        textStyle: const TextStyle(fontSize: 9, fontWeight: FontWeight.w700),
+        textStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700),
       ),
     ),
   );
@@ -637,15 +637,15 @@ abstract final class _SearchText {
   );
   static const section = TextStyle(
     color: _SearchColors.navy,
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: FontWeight.w800,
   );
   static const cardTitle = TextStyle(
     color: _SearchColors.navy,
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: FontWeight.w800,
   );
-  static const caption = TextStyle(color: _SearchColors.muted, fontSize: 10.5);
+  static const caption = TextStyle(color: _SearchColors.muted, fontSize: 12);
 }
 
 abstract final class _SearchDecor {

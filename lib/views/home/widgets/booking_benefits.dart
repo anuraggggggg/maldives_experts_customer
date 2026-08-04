@@ -97,7 +97,7 @@ class BookingBenefits extends StatelessWidget {
                         maxLines: 2,
                         style: const TextStyle(
                           color: AppColors.inputIcon,
-                          fontSize: 8,
+                          fontSize: 12,
                         ),
                       ),
                     ],

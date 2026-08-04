@@ -99,7 +99,7 @@ class HomeHeader extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: AppColors.white,
-                    fontSize: 15,
+                    fontSize: 16,
                     height: 1.2,
                     fontWeight: FontWeight.w500,
                     shadows: [Shadow(color: AppColors.authNavy, blurRadius: 5)],
@@ -157,7 +157,7 @@ class _NotificationButton extends StatelessWidget {
               '3',
               style: TextStyle(
                 color: AppColors.white,
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: FontWeight.w800,
               ),
             ),

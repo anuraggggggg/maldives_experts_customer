@@ -55,7 +55,9 @@ class FeatureShortcuts extends StatelessWidget {
       itemCount: _features.length,
       separatorBuilder: (_, __) => const SizedBox(width: AppSpacing.smPlus),
       itemBuilder: (_, index) => SizedBox(
-        width: 62,
+        // Long labels such as "Honeymoon" need enough room to avoid an
+        // unintended third line while keeping every shortcut aligned.
+        width: 76,
         child: Column(
           children: [
             Container(
@@ -78,7 +80,7 @@ class FeatureShortcuts extends StatelessWidget {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: AppColors.authNavy,
-                fontSize: 11,
+                fontSize: 12,
                 height: 1.12,
                 fontWeight: FontWeight.w700,
               ),

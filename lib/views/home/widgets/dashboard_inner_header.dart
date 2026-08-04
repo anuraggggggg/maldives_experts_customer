@@ -30,7 +30,7 @@ class DashboardInnerHeader extends StatelessWidget {
     final wide = MediaQuery.sizeOf(context).width >= 700;
 
     return SizedBox(
-      height: height + topInset,
+      height: height + topInset + AppSpacing.md,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -135,7 +135,7 @@ class DashboardInnerHeader extends StatelessWidget {
                               '3',
                               style: TextStyle(
                                 color: AppColors.white,
-                                fontSize: 10,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w800,
                               ),
                             ),
@@ -158,7 +158,7 @@ class DashboardInnerHeader extends StatelessWidget {
                         'Hi, John',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 13,
+                          fontSize: 14,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -186,7 +186,7 @@ class DashboardInnerHeader extends StatelessWidget {
                   subtitle,
                   style: const TextStyle(
                     color: AppColors.white,
-                    fontSize: 15,
+                    fontSize: 16,
                     height: 1.35,
                     fontWeight: FontWeight.w500,
                   ),

@@ -5,6 +5,7 @@ import '../constants/app_strings.dart';
 import '../constants/app_constants.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_spacing.dart';
+import '../theme/app_text_styles.dart';
 
 class AppBottomNavigation extends StatelessWidget {
   const AppBottomNavigation({
@@ -44,7 +45,7 @@ class AppBottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) => SafeArea(
     minimum: const EdgeInsets.fromLTRB(14, 0, 14, 8),
     child: Container(
-      height: 70,
+      height: 74,
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
       decoration: BoxDecoration(
         color: AppColors.white,
@@ -115,7 +116,8 @@ class _NavigationDestination extends StatelessWidget {
                 color: selected
                     ? AppColors.dashboardBlue
                     : AppColors.navInactive,
-                fontSize: 10.5,
+                fontSize: AppTextStyles.caption.fontSize,
+                height: AppTextStyles.caption.height,
                 fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
               ),
             ),

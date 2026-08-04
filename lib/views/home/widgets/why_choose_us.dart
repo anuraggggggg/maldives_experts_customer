@@ -73,7 +73,7 @@ class WhyChooseUs extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: AppColors.authNavy,
-                    fontSize: 10.5,
+                    fontSize: 12,
                     height: 1.12,
                     fontWeight: FontWeight.w700,
                   ),

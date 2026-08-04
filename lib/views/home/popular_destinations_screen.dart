@@ -128,7 +128,7 @@ class PopularDestinationsScreen extends StatelessWidget {
                       crossAxisCount: columns,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 12,
-                      childAspectRatio: columns == 1 ? 1.38 : .82,
+                      childAspectRatio: columns == 1 ? 1.25 : .78,
                     ),
                     itemBuilder: (_, index) =>
                         _DestinationCard(data: _items[index]),
@@ -212,7 +212,7 @@ class _DestinationTabs extends StatelessWidget {
                       color: active
                           ? AppColors.dashboardBlue
                           : AppColors.navInactive,
-                      fontSize: 11.5,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -324,7 +324,7 @@ class _Field extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: AppColors.slate, fontSize: 9),
+                style: const TextStyle(color: AppColors.slate, fontSize: 12),
               ),
               const SizedBox(height: 2),
               Text(
@@ -333,7 +333,7 @@ class _Field extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: AppColors.authNavy,
-                  fontSize: 11,
+                  fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -368,9 +368,9 @@ class _ExploreButton extends StatelessWidget {
         children: [
           Text(
             'Explore Destinations',
-            style: TextStyle(fontSize: 13, fontWeight: FontWeight.w800),
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
           ),
-          SizedBox(width: 14),
+          SizedBox(width: 8),
           Icon(Icons.arrow_forward_rounded, size: 20),
         ],
       ),
@@ -421,7 +421,7 @@ class _DestinationCard extends StatelessWidget {
                     data.badge,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 9,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -470,7 +470,7 @@ class _DestinationCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                           color: AppColors.dashboardBlue,
-                          fontSize: 10.5,
+                          fontSize: 12,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -484,7 +484,7 @@ class _DestinationCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: AppColors.slate,
-                    fontSize: 10.5,
+                    fontSize: 12,
                     height: 1.35,
                   ),
                 ),
@@ -502,13 +502,13 @@ class _DestinationCard extends StatelessWidget {
                     const Spacer(),
                     const Text(
                       'From ',
-                      style: TextStyle(color: AppColors.slate, fontSize: 11),
+                      style: TextStyle(color: AppColors.slate, fontSize: 12),
                     ),
                     Text(
                       '\$${data.price}',
                       style: const TextStyle(
                         color: AppColors.dashboardBlue,
-                        fontSize: 15,
+                        fontSize: 16,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -571,7 +571,7 @@ class _WhyVisit extends StatelessWidget {
                       item.$2,
                       style: const TextStyle(
                         color: AppColors.authNavy,
-                        fontSize: 11.5,
+                        fontSize: 12,
                         fontWeight: FontWeight.w800,
                       ),
                     ),

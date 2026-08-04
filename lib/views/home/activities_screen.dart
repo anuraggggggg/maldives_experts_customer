@@ -177,7 +177,7 @@ class _ActivityField extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: AppColors.inputIcon,
-                  fontSize: 8.5,
+                  fontSize: 12,
                 ),
               ),
               Text(
@@ -186,7 +186,7 @@ class _ActivityField extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: AppColors.authNavy,
-                  fontSize: 10.5,
+                  fontSize: 12,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -297,7 +297,7 @@ class _ActivityCategories extends StatelessWidget {
       ),
       const SizedBox(height: AppSpacing.sm),
       SizedBox(
-        height: 132,
+        height: 144,
         child: ListView.separated(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.regular),
           scrollDirection: Axis.horizontal,
@@ -328,7 +328,7 @@ class _ActivityCategories extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: AppColors.authNavy,
-                    fontSize: 11.5,
+                    fontSize: 12,
                     height: 1.15,
                     fontWeight: FontWeight.w800,
                   ),
@@ -445,10 +445,10 @@ class _PopularActivities extends StatelessWidget {
               crossAxisSpacing: AppSpacing.sm,
               mainAxisSpacing: AppSpacing.smPlus,
               mainAxisExtent: count == 2
-                  ? 360
+                  ? 368
                   : count == 3
-                  ? 335
-                  : 320,
+                  ? 343
+                  : 328,
             ),
             itemBuilder: (_, index) => _ActivityCard(data: activities[index]),
           );
@@ -502,7 +502,7 @@ class _ActivityCard extends StatelessWidget {
                     data.badge,
                     style: const TextStyle(
                       color: AppColors.white,
-                      fontSize: 10,
+                      fontSize: 12,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -544,7 +544,7 @@ class _ActivityCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     color: AppColors.dashboardBlue,
-                    fontSize: 10.5,
+                    fontSize: 12,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -586,7 +586,7 @@ class _ActivityCard extends StatelessWidget {
                       'Per Person',
                       style: TextStyle(
                         color: AppColors.slateDark,
-                        fontSize: 11.5,
+                        fontSize: 12,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -606,7 +606,7 @@ class _ActivityOfferBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    height: 150,
+    height: 154,
     margin: const EdgeInsets.symmetric(horizontal: AppSpacing.regular),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
@@ -646,7 +646,7 @@ class _ActivityOfferBanner extends StatelessWidget {
               ),
               Text(
                 'on selected activities when booked with a package',
-                style: TextStyle(color: AppColors.white, fontSize: 10),
+                style: TextStyle(color: AppColors.white, fontSize: 12),
               ),
               Spacer(),
               _ExploreButton(),
@@ -670,7 +670,7 @@ class _ActivityOfferBanner extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.white,
-                fontSize: 11,
+                fontSize: 12,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -696,7 +696,7 @@ class _ExploreButton extends StatelessWidget {
         'Explore Deals  →',
         style: TextStyle(
           color: AppColors.dashboardBlue,
-          fontSize: 10,
+          fontSize: 12,
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -779,7 +779,7 @@ class _ActivityReasons extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: AppColors.authNavy,
-                          fontSize: 8.5,
+                          fontSize: 12,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
@@ -789,7 +789,7 @@ class _ActivityReasons extends StatelessWidget {
                         textAlign: TextAlign.center,
                         style: const TextStyle(
                           color: AppColors.inputIcon,
-                          fontSize: 7,
+                          fontSize: 12,
                         ),
                       ),
                     ],
