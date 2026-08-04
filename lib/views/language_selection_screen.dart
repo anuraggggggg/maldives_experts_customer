@@ -9,13 +9,13 @@ class LanguageModel {
   final String code;
   final String nativeName;
   final String englishName;
-  final String flagEmoji;
+  final String countryCode;
 
   const LanguageModel({
     required this.code,
     required this.nativeName,
     required this.englishName,
-    required this.flagEmoji,
+    required this.countryCode,
   });
 }
 
@@ -35,37 +35,37 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
       code: 'en',
       nativeName: 'English',
       englishName: 'English',
-      flagEmoji: '🇬🇧',
+      countryCode: 'GB',
     ),
     LanguageModel(
       code: 'ar',
       nativeName: 'العربية',
       englishName: 'Arabic',
-      flagEmoji: '🇸🇦',
+      countryCode: 'SA',
     ),
     LanguageModel(
       code: 'hi',
       nativeName: 'हिन्दी',
       englishName: 'Hindi',
-      flagEmoji: '🇮🇳',
+      countryCode: 'IN',
     ),
     LanguageModel(
       code: 'ru',
       nativeName: 'Русский',
       englishName: 'Russian',
-      flagEmoji: '🇷🇺',
+      countryCode: 'RU',
     ),
     LanguageModel(
       code: 'zh',
       nativeName: '中文 (简体)',
       englishName: 'Chinese (Simplified)',
-      flagEmoji: '🇨🇳',
+      countryCode: 'CN',
     ),
     LanguageModel(
       code: 'de',
       nativeName: 'Deutsch',
       englishName: 'German',
-      flagEmoji: '🇩🇪',
+      countryCode: 'DE',
     ),
   ];
 
@@ -73,6 +73,8 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
     final screenWidth = mq.size.width;
+    final availableHeight = mq.size.height - mq.padding.vertical;
+    final languageListHeight = (availableHeight - 300).clamp(220.0, 430.0);
 
     return Scaffold(
       body: Stack(
@@ -87,191 +89,199 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
 
           // Main Layout
           SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  // 1. FIXED TOP HEADER SECTION
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 12),
-                    child: Center(
-                      child: SizedBox(
-                        width: screenWidth * 0.65,
-                        child: Image.asset(
-                          AppConstants.brandLogoPath,
-                          fit: BoxFit.contain,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Column(
-                                children: [
-                                  Text(
-                                    'Maldives',
-                                    style: TextStyle(
-                                      fontSize: 32,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.authNavy,
-                                      letterSpacing: 1.2,
+            child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    // 1. FIXED TOP HEADER SECTION
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 12),
+                      child: Center(
+                        child: SizedBox(
+                          width: screenWidth * 0.65,
+                          child: Image.asset(
+                            AppConstants.brandLogoPath,
+                            height: 72,
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Column(
+                                  children: [
+                                    Text(
+                                      'Maldives',
+                                      style: TextStyle(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.authNavy,
+                                        letterSpacing: 1.2,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    'EXPERTS',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColors.orange,
-                                      letterSpacing: 4.0,
+                                    Text(
+                                      'EXPERTS',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppColors.orange,
+                                        letterSpacing: 4.0,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
+                                  ],
+                                ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
 
-                  // Globe Icon Badge
-                  Container(
-                    width: 42,
-                    height: 42,
-                    decoration: const BoxDecoration(
-                      color: AppColors.blueTint,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.language,
-                      color: AppColors.authBlue,
-                      size: 22,
-                    ),
-                  ),
-
-                  const SizedBox(height: 8),
-
-                  // Title & Subtitle
-                  const Text(
-                    'Choose Your Language',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
-                      color: AppColors.authNavy,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    'Select your preferred language to get started',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.inputIcon,
-                      height: 1.2,
-                    ),
-                  ),
-
-                  const SizedBox(height: 14),
-
-                  // 2. SCROLLABLE MIDDLE SECTION (Only language tiles scroll)
-                  Expanded(
-                    child: ListView.separated(
-                      keyboardDismissBehavior:
-                          ScrollViewKeyboardDismissBehavior.onDrag,
-                      physics: const BouncingScrollPhysics(),
-                      padding: const EdgeInsets.only(bottom: 12),
-                      itemCount: _languages.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 8),
-                      itemBuilder: (context, index) {
-                        final lang = _languages[index];
-                        final isSelected = lang.code == _selectedLanguageCode;
-
-                        return _LanguageTile(
-                          language: lang,
-                          isSelected: isSelected,
-                          onTap: () {
-                            setState(() {
-                              _selectedLanguageCode = lang.code;
-                            });
-                          },
-                        );
-                      },
-                    ),
-                  ),
-
-                  // 3. FIXED BOTTOM ACTION SECTION
-                  const SizedBox(height: 10),
-
-                  // Fixed Continue Button with Login Navigation
-                  Container(
-                    height: 50,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(25),
-                      gradient: const LinearGradient(
-                        colors: [AppColors.royalBlue, AppColors.brightBlue],
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
+                    // Globe Icon Badge
+                    Container(
+                      width: 42,
+                      height: 42,
+                      decoration: const BoxDecoration(
+                        color: AppColors.blueTint,
+                        shape: BoxShape.circle,
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.authBlue.withValues(alpha: 0.3),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+                      child: const Icon(
+                        Icons.language,
+                        color: AppColors.authBlue,
+                        size: 22,
+                      ),
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    // Title & Subtitle
+                    const Text(
+                      'Choose Your Language',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.authNavy,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    const Text(
+                      'Select your preferred language to get started',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: AppColors.inputIcon,
+                        height: 1.2,
+                      ),
+                    ),
+
+                    const SizedBox(height: 14),
+
+                    // 2. SCROLLABLE MIDDLE SECTION (Only language tiles scroll)
+                    SizedBox(
+                      height: languageListHeight,
+                      child: ListView.separated(
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsets.only(bottom: 12),
+                        itemCount: _languages.length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 8),
+                        itemBuilder: (context, index) {
+                          final lang = _languages[index];
+                          final isSelected = lang.code == _selectedLanguageCode;
+
+                          return _LanguageTile(
+                            language: lang,
+                            isSelected: isSelected,
+                            onTap: () {
+                              setState(() {
+                                _selectedLanguageCode = lang.code;
+                              });
+                            },
+                          );
+                        },
+                      ),
+                    ),
+
+                    // 3. FIXED BOTTOM ACTION SECTION
+                    const SizedBox(height: 10),
+
+                    // Fixed Continue Button with Login Navigation
+                    Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        gradient: const LinearGradient(
+                          colors: [AppColors.royalBlue, AppColors.brightBlue],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.authBlue.withValues(alpha: 0.3),
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(25),
+                          onTap: () {
+                            // Navigates to the Login screen using GoRouter
+                            context.goNamed(RouteNames.login);
+                          },
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Continue',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white,
+                                size: 18,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    // Bottom Note
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.verified_user_outlined,
+                          size: 14,
+                          color: AppColors.brightBlue,
+                        ),
+                        SizedBox(width: 6),
+                        Flexible(
+                          child: Text(
+                            'You can change the language anytime from settings',
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            style: TextStyle(
+                              color: AppColors.inputIcon,
+                              fontSize: 12,
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(25),
-                        onTap: () {
-                          // Navigates to the Login screen using GoRouter
-                          context.goNamed(RouteNames.login);
-                        },
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Continue',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            SizedBox(width: 8),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
-                              size: 18,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
 
-                  const SizedBox(height: 8),
-
-                  // Bottom Note
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.verified_user_outlined,
-                        size: 14,
-                        color: AppColors.brightBlue,
-                      ),
-                      SizedBox(width: 6),
-                      Text(
-                        'You can change the language anytime from settings',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: AppColors.inputIcon,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 12),
-                ],
+                    const SizedBox(height: 12),
+                  ],
+                ),
               ),
             ),
           ),
@@ -320,7 +330,8 @@ class _LanguageTile extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
             child: Row(
               children: [
-                // Flag Container
+                // Country badge. Using text instead of flag emoji avoids
+                // missing-glyph boxes on iOS simulator and device fonts.
                 Container(
                   width: 34,
                   height: 34,
@@ -330,8 +341,13 @@ class _LanguageTile extends StatelessWidget {
                   ),
                   alignment: Alignment.center,
                   child: Text(
-                    language.flagEmoji,
-                    style: const TextStyle(fontSize: 18),
+                    language.countryCode,
+                    style: const TextStyle(
+                      color: AppColors.authNavy,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: 0.2,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12),

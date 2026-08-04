@@ -52,17 +52,18 @@ class HomeHeader extends StatelessWidget {
                       icon: Icons.menu_rounded,
                       onPressed: () => Scaffold.of(context).openDrawer(),
                     ),
-                    const Spacer(),
-                    const Hero(
-                      tag: 'dashboard-brand-logo',
-                      child: Image(
-                        image: AssetImage(AppAssets.brandLogo),
-                        width: 190,
-                        height: 82,
-                        fit: BoxFit.contain,
+                    const SizedBox(width: AppSpacing.sm),
+                    const Expanded(
+                      child: Hero(
+                        tag: 'dashboard-brand-logo',
+                        child: Image(
+                          image: AssetImage(AppAssets.brandLogo),
+                          height: 82,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
-                    const Spacer(),
+                    const SizedBox(width: AppSpacing.sm),
                     const _NotificationButton(),
                     const SizedBox(width: AppSpacing.sm),
                     Container(

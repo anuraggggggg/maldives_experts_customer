@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_spacing.dart';
 
 class BookingBenefits extends StatelessWidget {
   const BookingBenefits({this.compact = false, super.key});
@@ -10,43 +9,37 @@ class BookingBenefits extends StatelessWidget {
 
   static const items = <BookingBenefit>[
     BookingBenefit(
-      'Best Price\nGuarantee',
-      'We match any price',
+      'Best Price Guarantee',
       Icons.gpp_good_outlined,
       AppColors.featureGreen,
       AppColors.successDark,
     ),
     BookingBenefit(
-      'Instant\nConfirmation',
-      'Quick & easy booking',
+      'Instant Confirmation',
       Icons.bolt_rounded,
       AppColors.featureBlue,
       AppColors.dashboardBlue,
     ),
     BookingBenefit(
-      'Secure\nBooking',
-      '100% secure payments',
+      'Secure Booking',
       Icons.lock_outline_rounded,
       AppColors.featurePurple,
       AppColors.shortcutPurple,
     ),
     BookingBenefit(
-      '24/7\nSupport',
-      "We're here anytime",
+      '24/7 Support',
       Icons.support_agent_rounded,
       AppColors.featureOrange,
       AppColors.orange,
     ),
     BookingBenefit(
-      'Free\nTransfers',
-      'On selected resorts',
+      'Free Transfers',
       Icons.flight_takeoff_rounded,
       AppColors.featureTeal,
       AppColors.shortcutTeal,
     ),
     BookingBenefit(
-      'Exclusive\nBenefits',
-      'Extra perks & offers',
+      'Exclusive Benefits',
       Icons.card_giftcard_rounded,
       AppColors.featurePink,
       AppColors.shortcutPink,
@@ -57,7 +50,7 @@ class BookingBenefits extends StatelessWidget {
   Widget build(BuildContext context) {
     final visibleItems = compact ? items.take(4).toList() : items;
     return SizedBox(
-      height: compact ? 76 : 112,
+      height: compact ? 68 : 74,
       child: Row(
         children: visibleItems
             .map(
@@ -77,30 +70,18 @@ class BookingBenefits extends StatelessWidget {
                         size: compact ? 21 : 25,
                       ),
                     ),
-                    const SizedBox(height: AppSpacing.xs),
+                    const SizedBox(height: 2),
                     Text(
                       item.title,
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       style: TextStyle(
                         color: AppColors.authNavy,
-                        fontSize: compact ? 9.5 : 10.5,
-                        height: 1.1,
+                        fontSize: compact ? 9 : 9.5,
+                        height: 1.0,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    if (!compact) ...[
-                      const SizedBox(height: AppSpacing.xs),
-                      Text(
-                        item.subtitle,
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        style: const TextStyle(
-                          color: AppColors.inputIcon,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
                   ],
                 ),
               ),
@@ -112,16 +93,9 @@ class BookingBenefits extends StatelessWidget {
 }
 
 class BookingBenefit {
-  const BookingBenefit(
-    this.title,
-    this.subtitle,
-    this.icon,
-    this.background,
-    this.foreground,
-  );
+  const BookingBenefit(this.title, this.icon, this.background, this.foreground);
 
   final String title;
-  final String subtitle;
   final IconData icon;
   final Color background;
   final Color foreground;

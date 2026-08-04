@@ -198,7 +198,7 @@ class _OfferCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    height: 200,
+    height: 235 * MediaQuery.textScalerOf(context).scale(1),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(AppSpacing.sm),
     ),
@@ -351,7 +351,7 @@ class _ExtraBenefits extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: 140,
+    height: 200 * MediaQuery.textScalerOf(context).scale(1),
     child: ListView.separated(
       scrollDirection: Axis.horizontal,
       itemCount: items.length,
@@ -410,45 +410,77 @@ class _SubscribeBanner extends StatelessWidget {
       borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
       border: Border.all(color: AppColors.blueBorder),
     ),
-    child: Row(
-      children: [
-        Container(
-          width: 44,
-          height: 44,
-          decoration: const BoxDecoration(
-            color: AppColors.dashboardBlue,
-            shape: BoxShape.circle,
-          ),
-          child: const Icon(Icons.mail_outline, color: AppColors.white),
-        ),
-        const SizedBox(width: AppSpacing.compact),
-        const Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Don't Miss Any Offers!",
-                style: TextStyle(
-                  color: AppColors.authNavy,
-                  fontWeight: FontWeight.w800,
+    child: LayoutBuilder(
+      builder: (context, constraints) => constraints.maxWidth < 430
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Row(
+                  children: [
+                    _SubscribeIcon(),
+                    SizedBox(width: AppSpacing.compact),
+                    Expanded(child: _SubscribeCopy()),
+                  ],
                 ),
-              ),
-              Text(
-                'Subscribe to get exclusive offers and updates',
-                style: TextStyle(color: AppColors.inputIcon, fontSize: 12),
-              ),
-            ],
-          ),
-        ),
-        FilledButton(
-          onPressed: () {},
-          style: FilledButton.styleFrom(
-            backgroundColor: AppColors.dashboardBlue,
-          ),
-          child: const Text('Subscribe Now →'),
-        ),
-      ],
+                const SizedBox(height: AppSpacing.sm),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: FilledButton(
+                    onPressed: () {},
+                    child: const Text('Subscribe Now →'),
+                  ),
+                ),
+              ],
+            )
+          : Row(
+              children: [
+                const _SubscribeIcon(),
+                const SizedBox(width: AppSpacing.compact),
+                const Expanded(child: _SubscribeCopy()),
+                FilledButton(
+                  onPressed: () {},
+                  child: const Text('Subscribe Now →'),
+                ),
+              ],
+            ),
     ),
+  );
+}
+
+class _SubscribeIcon extends StatelessWidget {
+  const _SubscribeIcon();
+
+  @override
+  Widget build(BuildContext context) => Container(
+    width: 44,
+    height: 44,
+    decoration: const BoxDecoration(
+      color: AppColors.dashboardBlue,
+      shape: BoxShape.circle,
+    ),
+    child: const Icon(Icons.mail_outline, color: AppColors.white),
+  );
+}
+
+class _SubscribeCopy extends StatelessWidget {
+  const _SubscribeCopy();
+
+  @override
+  Widget build(BuildContext context) => const Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        "Don't Miss Any Offers!",
+        style: TextStyle(
+          color: AppColors.authNavy,
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+      Text(
+        'Subscribe to get exclusive offers and updates',
+        style: TextStyle(color: AppColors.inputIcon, fontSize: 12),
+      ),
+    ],
   );
 }
 

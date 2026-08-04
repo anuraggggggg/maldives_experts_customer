@@ -371,7 +371,7 @@ class _ResortResultCard extends StatelessWidget {
   final _CardData data;
   @override
   Widget build(BuildContext context) => Container(
-    height: 145,
+    height: 205 * MediaQuery.textScalerOf(context).scale(1),
     clipBehavior: Clip.antiAlias,
     decoration: _PageDecor.card,
     child: Row(
@@ -526,7 +526,7 @@ class _SearchField extends StatelessWidget {
   final String value;
   @override
   Widget build(BuildContext context) => Container(
-    height: 58,
+    height: 80 * MediaQuery.textScalerOf(context).scale(1),
     padding: const EdgeInsets.symmetric(horizontal: 11),
     decoration: BoxDecoration(
       border: Border.all(color: AppColors.authBorder),

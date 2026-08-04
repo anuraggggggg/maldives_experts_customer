@@ -10,7 +10,7 @@ class OfferBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    height: 158,
+    height: 188 * MediaQuery.textScalerOf(context).scale(1),
     margin: const EdgeInsets.symmetric(horizontal: AppSpacing.regular),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(AppSpacing.radiusMd),

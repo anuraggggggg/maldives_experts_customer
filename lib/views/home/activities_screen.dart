@@ -445,10 +445,10 @@ class _PopularActivities extends StatelessWidget {
               crossAxisSpacing: AppSpacing.sm,
               mainAxisSpacing: AppSpacing.smPlus,
               mainAxisExtent: count == 2
-                  ? 368
+                  ? 460
                   : count == 3
-                  ? 343
-                  : 328,
+                  ? 420
+                  : 400,
             ),
             itemBuilder: (_, index) => _ActivityCard(data: activities[index]),
           );
@@ -582,12 +582,16 @@ class _ActivityCard extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Text(
-                      'Per Person',
-                      style: TextStyle(
-                        color: AppColors.slateDark,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
+                    const Flexible(
+                      child: Text(
+                        'Per Person',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: AppColors.slateDark,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ],
@@ -606,7 +610,7 @@ class _ActivityOfferBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    height: 154,
+    height: 220 * MediaQuery.textScalerOf(context).scale(1),
     margin: const EdgeInsets.symmetric(horizontal: AppSpacing.regular),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(AppSpacing.radiusSm),

@@ -325,24 +325,27 @@ class _MemberBadge extends StatelessWidget {
       color: Colors.white.withValues(alpha: .16),
       borderRadius: BorderRadius.circular(12),
     ),
-    child: const Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(
-          Icons.workspace_premium_outlined,
-          color: Color(0xFFFFD66B),
-          size: 15,
-        ),
-        SizedBox(width: 4),
-        Text(
-          'Gold Member',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
+    child: const FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.workspace_premium_outlined,
+            color: Color(0xFFFFD66B),
+            size: 15,
           ),
-        ),
-      ],
+          SizedBox(width: 4),
+          Text(
+            'Gold Member',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
     ),
   );
 }

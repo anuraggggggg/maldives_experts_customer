@@ -43,7 +43,7 @@ class DestinationSection extends StatelessWidget {
       ),
       const SizedBox(height: AppSpacing.xs),
       SizedBox(
-        height: 170,
+        height: 170 * MediaQuery.textScalerOf(context).scale(1),
         child: ListView.separated(
           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.regular),
           scrollDirection: Axis.horizontal,

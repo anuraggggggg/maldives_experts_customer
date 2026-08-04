@@ -766,6 +766,7 @@ class _OngoingTripCard extends StatelessWidget {
                 ),
               ),
               Container(
+                constraints: const BoxConstraints(maxWidth: 88),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: const Color(0xFFE9F8E6),
@@ -784,7 +785,9 @@ class _OngoingTripCard extends StatelessWidget {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      '✈  Enjoy your trip!',
+                      'Enjoy your trip!',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(color: _TripColors.navy, fontSize: 12),
                     ),
                   ],

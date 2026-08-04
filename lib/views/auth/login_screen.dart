@@ -148,10 +148,24 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       const SizedBox(height: 6),
-                      Text(
-                        _isLoginTab
-                            ? 'Login to continue your journey\nto the Maldives 🌊'
-                            : 'Sign up to start planning your dream\ngetaway to the Maldives 🌊',
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: _isLoginTab
+                                  ? 'Login to continue your journey\nto the Maldives '
+                                  : 'Sign up to start planning your dream\ngetaway to the Maldives ',
+                            ),
+                            const WidgetSpan(
+                              alignment: PlaceholderAlignment.middle,
+                              child: Icon(
+                                Icons.water_rounded,
+                                color: AppColors.white,
+                                size: 18,
+                              ),
+                            ),
+                          ],
+                        ),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
@@ -435,30 +449,33 @@ class _AuthTabBar extends StatelessWidget {
                 onTap: () => onChanged(true),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.person,
-                        size: 20,
-                        color: isLoginTab
-                            ? AppColors.authNavy
-                            : AppColors.inactive,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Login',
-                        style: TextStyle(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.person,
+                          size: 20,
                           color: isLoginTab
                               ? AppColors.authNavy
                               : AppColors.inactive,
-                          fontWeight: isLoginTab
-                              ? FontWeight.w700
-                              : FontWeight.w500,
-                          fontSize: 16,
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 8),
+                        Text(
+                          'Login',
+                          style: TextStyle(
+                            color: isLoginTab
+                                ? AppColors.authNavy
+                                : AppColors.inactive,
+                            fontWeight: isLoginTab
+                                ? FontWeight.w700
+                                : FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -468,30 +485,33 @@ class _AuthTabBar extends StatelessWidget {
                 onTap: () => onChanged(false),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.person_add_alt_1,
-                        size: 20,
-                        color: !isLoginTab
-                            ? AppColors.authNavy
-                            : AppColors.inactive,
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Register',
-                        style: TextStyle(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.person_add_alt_1,
+                          size: 20,
                           color: !isLoginTab
                               ? AppColors.authNavy
                               : AppColors.inactive,
-                          fontWeight: !isLoginTab
-                              ? FontWeight.w700
-                              : FontWeight.w500,
-                          fontSize: 16,
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 8),
+                        Text(
+                          'Register',
+                          style: TextStyle(
+                            color: !isLoginTab
+                                ? AppColors.authNavy
+                                : AppColors.inactive,
+                            fontWeight: !isLoginTab
+                                ? FontWeight.w700
+                                : FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -606,12 +626,16 @@ class _SocialButton extends StatelessWidget {
       children: [
         iconWidget,
         const SizedBox(width: 8),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: AppColors.inputText,
-            fontWeight: FontWeight.w600,
+        Flexible(
+          child: Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 12,
+              color: AppColors.inputText,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ],

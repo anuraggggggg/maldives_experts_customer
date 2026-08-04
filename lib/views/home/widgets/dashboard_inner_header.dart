@@ -27,10 +27,11 @@ class DashboardInnerHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final topInset = MediaQuery.paddingOf(context).top;
-    final wide = MediaQuery.sizeOf(context).width >= 700;
+    final wide = MediaQuery.sizeOf(context).width >= 1000;
+    final textScale = MediaQuery.textScalerOf(context).scale(1);
 
     return SizedBox(
-      height: height + topInset + AppSpacing.md,
+      height: height * textScale + topInset + AppSpacing.md,
       child: Stack(
         fit: StackFit.expand,
         children: [

@@ -698,7 +698,7 @@ class _PriceRow extends StatelessWidget {
     children: [
       Row(
         children: [
-          const Text('From ', style: _WishText.meta),
+          const Flexible(child: Text('From ', style: _WishText.meta)),
           Text(
             price,
             style: const TextStyle(

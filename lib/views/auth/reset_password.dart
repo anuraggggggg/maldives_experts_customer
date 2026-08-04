@@ -297,7 +297,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                         const SizedBox(height: 10),
 
                         // Password Strength Row
-                        Row(
+                        Wrap(
+                          spacing: 2,
+                          runSpacing: 4,
                           children: [
                             const Text(
                               'Password strength: ',
@@ -315,7 +317,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            Expanded(
+                            SizedBox(
+                              width: 100,
                               child: Row(
                                 children: List.generate(
                                   5,
@@ -452,24 +455,27 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             child: InkWell(
                               borderRadius: BorderRadius.circular(24),
                               onTap: () => context.goNamed(RouteNames.login),
-                              child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Reset Password',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
+                              child: const FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Reset Password',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: 8),
-                                  Icon(
-                                    Icons.arrow_forward_rounded,
-                                    color: Colors.white,
-                                    size: 18,
-                                  ),
-                                ],
+                                    SizedBox(width: 8),
+                                    Icon(
+                                      Icons.arrow_forward_rounded,
+                                      color: Colors.white,
+                                      size: 18,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -494,25 +500,27 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Your password will be updated securely.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppColors.authNavy,
+                            const Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Your password will be updated securely.',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.authNavy,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  'You will be redirected to login.',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: AppColors.slate,
+                                  Text(
+                                    'You will be redirected to login.',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: AppColors.slate,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),

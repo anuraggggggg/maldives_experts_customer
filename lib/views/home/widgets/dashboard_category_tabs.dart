@@ -54,25 +54,33 @@ class DashboardCategoryTabs extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      category.icon,
-                      size: 20,
-                      color: category == selected
-                          ? AppColors.dashboardBlue
-                          : AppColors.navInactive,
-                    ),
-                    const SizedBox(width: AppSpacing.xs),
                     Flexible(
-                      child: Text(
-                        category.label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: category == selected
-                              ? AppColors.dashboardBlue
-                              : AppColors.navInactive,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w700,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.center,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              category.icon,
+                              size: 20,
+                              color: category == selected
+                                  ? AppColors.dashboardBlue
+                                  : AppColors.navInactive,
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              category.label,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: category == selected
+                                    ? AppColors.dashboardBlue
+                                    : AppColors.navInactive,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

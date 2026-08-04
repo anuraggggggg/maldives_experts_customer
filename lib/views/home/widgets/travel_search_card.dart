@@ -107,16 +107,22 @@ class TravelSearchCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppSpacing.sm),
                 ),
               ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppStrings.searchPackages,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                  ),
-                  SizedBox(width: AppSpacing.xl),
-                  Icon(Icons.arrow_forward_rounded, size: 23),
-                ],
+              child: const FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppStrings.searchPackages,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(width: AppSpacing.xl),
+                    Icon(Icons.arrow_forward_rounded, size: 23),
+                  ],
+                ),
               ),
             ),
           ),
@@ -152,29 +158,31 @@ class _CategoryTab extends StatelessWidget {
           ),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            category.icon,
-            size: 20,
-            color: selected ? AppColors.dashboardBlue : AppColors.navInactive,
-          ),
-          const SizedBox(width: AppSpacing.xs),
-          Flexible(
-            child: Text(
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              category.icon,
+              size: 19,
+              color: selected ? AppColors.dashboardBlue : AppColors.navInactive,
+            ),
+            const SizedBox(width: 3),
+            Text(
               category.label,
               maxLines: 1,
               style: TextStyle(
                 color: selected
                     ? AppColors.dashboardBlue
                     : AppColors.navInactive,
-                fontSize: 14,
+                fontSize: 13,
                 fontWeight: FontWeight.w700,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );

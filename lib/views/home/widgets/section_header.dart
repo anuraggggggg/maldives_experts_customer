@@ -23,21 +23,28 @@ class SectionHeader extends StatelessWidget {
       children: [
         Expanded(child: Text(title, style: AppTextStyles.dashboardSection)),
         if (actionLabel case final label?)
-          TextButton.icon(
-            onPressed: onAction,
-            iconAlignment: IconAlignment.end,
-            label: Text(
-              label,
-              style: const TextStyle(
-                color: AppColors.dashboardBlue,
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerRight,
+              child: TextButton.icon(
+                onPressed: onAction,
+                iconAlignment: IconAlignment.end,
+                label: Text(
+                  label,
+                  maxLines: 1,
+                  style: const TextStyle(
+                    color: AppColors.dashboardBlue,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                  ),
+                ),
+                icon: const Icon(
+                  Icons.chevron_right_rounded,
+                  color: AppColors.dashboardBlue,
+                  size: 19,
+                ),
               ),
-            ),
-            icon: const Icon(
-              Icons.chevron_right_rounded,
-              color: AppColors.dashboardBlue,
-              size: 19,
             ),
           ),
       ],

@@ -141,16 +141,16 @@ class _SavedSearchesScreenState extends State<SavedSearchesScreen> {
                     ),
                     const SizedBox(height: 16),
                   ],
-                  Row(
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 7,
+                    runSpacing: 8,
                     children: [
-                      const Expanded(
-                        child: Text(
-                          '5 Saved Searches',
-                          style: _SearchText.section,
-                        ),
+                      const Text(
+                        '5 Saved Searches',
+                        style: _SearchText.section,
                       ),
                       const Text('Sort by:', style: _SearchText.caption),
-                      const SizedBox(width: 7),
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(

@@ -47,17 +47,17 @@ class FeatureShortcuts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => SizedBox(
-    height: 108,
+    height: 98,
     child: ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.regular),
       scrollDirection: Axis.horizontal,
       physics: const BouncingScrollPhysics(),
       itemCount: _features.length,
-      separatorBuilder: (_, __) => const SizedBox(width: AppSpacing.smPlus),
+      separatorBuilder: (_, __) => const SizedBox.shrink(),
       itemBuilder: (_, index) => SizedBox(
         // Long labels such as "Honeymoon" need enough room to avoid an
         // unintended third line while keeping every shortcut aligned.
-        width: 76,
+        width: 72,
         child: Column(
           children: [
             Container(
@@ -73,7 +73,7 @@ class FeatureShortcuts extends StatelessWidget {
                 size: 28,
               ),
             ),
-            const SizedBox(height: AppSpacing.sm),
+            const SizedBox(height: 3),
             Text(
               _features[index].label,
               maxLines: 2,

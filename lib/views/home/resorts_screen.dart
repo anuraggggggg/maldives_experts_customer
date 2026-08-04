@@ -333,6 +333,7 @@ class _ResortGrid extends StatelessWidget {
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, constraints) {
       final count = constraints.maxWidth >= 450 ? 3 : 2;
+      final textScale = MediaQuery.textScalerOf(context).scale(1);
       return GridView.builder(
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.smPlus),
         shrinkWrap: true,
@@ -342,7 +343,7 @@ class _ResortGrid extends StatelessWidget {
           crossAxisCount: count,
           crossAxisSpacing: AppSpacing.sm,
           mainAxisSpacing: AppSpacing.smPlus,
-          mainAxisExtent: count == 3 ? 402 : 372,
+          mainAxisExtent: (count == 3 ? 420 : 396) * textScale,
         ),
         itemBuilder: (_, index) => _ResortCard(data: resorts[index]),
       );
@@ -539,34 +540,59 @@ class _ExpertBanner extends StatelessWidget {
       borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
       border: Border.all(color: AppColors.blueBorder),
     ),
-    child: const Row(
-      children: [
-        Icon(
+    child: LayoutBuilder(
+      builder: (context, constraints) {
+        const copy = Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Can't find the right resort?",
+              style: TextStyle(
+                color: AppColors.authNavy,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            Text(
+              'Our travel experts will help you find the perfect resort.',
+              style: TextStyle(color: AppColors.inputIcon, fontSize: 12),
+            ),
+          ],
+        );
+        const icon = Icon(
           Icons.beach_access_rounded,
           color: AppColors.dashboardBlue,
           size: 34,
-        ),
-        SizedBox(width: AppSpacing.md),
-        Expanded(
-          child: Column(
+        );
+        const button = OutlinedButton(
+          onPressed: null,
+          child: Text('Speak to Expert'),
+        );
+        if (constraints.maxWidth < 430) {
+          return const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Can't find the right resort?",
-                style: TextStyle(
-                  color: AppColors.authNavy,
-                  fontWeight: FontWeight.w800,
-                ),
+              Row(
+                children: [
+                  icon,
+                  SizedBox(width: AppSpacing.md),
+                  Expanded(child: copy),
+                ],
               ),
-              Text(
-                'Our travel experts will help you find the perfect resort.',
-                style: TextStyle(color: AppColors.inputIcon, fontSize: 12),
-              ),
+              SizedBox(height: AppSpacing.sm),
+              Align(alignment: Alignment.centerRight, child: button),
             ],
-          ),
-        ),
-        OutlinedButton(onPressed: null, child: Text('Speak to Expert')),
-      ],
+          );
+        }
+        return const Row(
+          children: [
+            icon,
+            SizedBox(width: AppSpacing.md),
+            Expanded(child: copy),
+            SizedBox(width: AppSpacing.sm),
+            button,
+          ],
+        );
+      },
     ),
   );
 }

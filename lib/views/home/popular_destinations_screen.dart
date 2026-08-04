@@ -128,7 +128,7 @@ class PopularDestinationsScreen extends StatelessWidget {
                       crossAxisCount: columns,
                       crossAxisSpacing: 12,
                       mainAxisSpacing: 12,
-                      childAspectRatio: columns == 1 ? 1.25 : .78,
+                      childAspectRatio: columns == 1 ? 1.14 : .69,
                     ),
                     itemBuilder: (_, index) =>
                         _DestinationCard(data: _items[index]),
@@ -363,16 +363,19 @@ class _ExploreButton extends StatelessWidget {
     child: TextButton(
       onPressed: () {},
       style: TextButton.styleFrom(foregroundColor: Colors.white),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Explore Destinations',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
-          ),
-          SizedBox(width: 8),
-          Icon(Icons.arrow_forward_rounded, size: 20),
-        ],
+      child: const FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Explore Destinations',
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+            ),
+            SizedBox(width: 8),
+            Icon(Icons.arrow_forward_rounded, size: 20),
+          ],
+        ),
       ),
     ),
   );
@@ -491,25 +494,41 @@ class _DestinationCard extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    Text(
-                      '${data.resorts} Resorts',
-                      style: const TextStyle(
-                        color: AppColors.slate,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                    Expanded(
+                      child: Text(
+                        '${data.resorts} Resorts',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: AppColors.slate,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                    const Spacer(),
-                    const Text(
-                      'From ',
-                      style: TextStyle(color: AppColors.slate, fontSize: 12),
-                    ),
-                    Text(
-                      '\$${data.price}',
-                      style: const TextStyle(
-                        color: AppColors.dashboardBlue,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w800,
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Row(
+                          children: [
+                            const Text(
+                              'From ',
+                              style: TextStyle(
+                                color: AppColors.slate,
+                                fontSize: 12,
+                              ),
+                            ),
+                            Text(
+                              '\$${data.price}',
+                              style: const TextStyle(
+                                color: AppColors.dashboardBlue,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
